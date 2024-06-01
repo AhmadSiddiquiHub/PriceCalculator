@@ -31,25 +31,59 @@ const prices = [
   [355, 372, 388, 406, 423, 439, 456, 472, 490, 506, 523, 539],
 ];
 
+// Define a color map object
+const colorMap = {
+  Blanc: "#ffffff",
+  "Maron Jamaique": "#5b5454",
+  "Blanc Crème": "#dfd9c3",
+  "Beige Clair": "#dfcdac",
+  Naturel: "#c0beba",
+  "Gris Clair": "#a6a89b",
+  "Gris Basalte": "#6f7473",
+  "Gris Quartz": "#857c71",
+  "Gris Anthracite": "#363b3b",
+  Noir: "#000000",
+};
+
 // Colors array
 const colors = [
-  "Color1",
-  "Color2",
-  "Color3",
-  "Color4",
-  "Color5",
-  "Color6",
-  "Color7",
+  "Blanc",
+  "Maron Jamaique",
+  "Blanc Crème",
+  "Beige Clair",
+  "Naturel",
+  "Gris Clair",
+  "Gris Basalte",
+  "Gris Quartz",
+  "Gris Anthracite",
+  "Noir",
 ];
 
 // Motors array
-const motors = ["None", "A", "B"];
+const motors = [
+  {
+    name: "Moteur Filaire (commande via interrupteur)",
+    imagePath: "/images/mot-1.png",
+  },
+  { name: "Moteur Télécommandé", imagePath: "/images/mot-2.png" },
+];
+
+const cableTypes = [
+  { name: "Haut droit", imagePath: "/images/edge-1.png" },
+  { name: "Haut arrière droit", imagePath: "/images/edge-2.png" },
+  { name: "Bas arrière droit", imagePath: "/images/edge-3.png" },
+  { name: "Haut gauche", imagePath: "/images/edge-4.png" },
+  { name: "Haut arrière gauche", imagePath: "/images/edge-5.png" },
+  { name: "Bas arrière gauche", imagePath: "/images/edge-6.png" },
+];
 
 const PriceCalculator = () => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
   const [selectedWidth, setSelectedWidth] = useState(widths[0]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
-  const [selectedMotor, setSelectedMotor] = useState(motors[0]);
+  const [selectedMotor, setSelectedMotor] = useState(null);
+  const [selectedInterrupteur, setSelectedInterrupteur] = useState(null);
+  const [selectedCableType, setSelectedCableType] = useState("");
   const [price, setPrice] = useState(prices[0][0]);
 
   const handleLengthChange = (e) => {
@@ -71,9 +105,20 @@ const PriceCalculator = () => {
   };
 
   const handleMotorChange = (e) => {
-    const newMotor = e.target.value;
+    const newMotorName = e.target.value;
+    const newMotor = motors.find((motor) => motor.name === newMotorName);
     setSelectedMotor(newMotor);
     updatePrice(selectedLength, selectedWidth, selectedColor, newMotor);
+  };
+
+  const handleInterrupteurChange = (e) => {
+    const selectedValue = parseInt(e.target.value);
+    setSelectedInterrupteur(selectedValue);
+  };
+
+  const handleCableTypeChange = (e) => {
+    const cableType = e.target.value;
+    setSelectedCableType(cableType);
   };
 
   const updatePrice = (length, width, color, motor) => {
@@ -84,79 +129,246 @@ const PriceCalculator = () => {
       if (colors.indexOf(color) > 1) {
         basePrice += basePrice * 0.12;
       }
-      const area = length * width * 3;
-      if (motor === "A") {
-        basePrice += area < 15 ? 10 : 21;
-      } else if (motor === "B") {
-        basePrice += area < 15 ? 21 : 81;
+      if (motor) {
+        const area = length * width * 3;
+        if (motor.name === "Moteur Filaire (commande via interrupteur)") {
+          basePrice += area < 15 ? 10 : 21;
+        } else if (motor.name === "Moteur Télécommandé") {
+          basePrice += area < 15 ? 21 : 81;
+        }
       }
       setPrice(basePrice);
     }
   };
 
   return (
-    <div>
-      <h1>Price Calculator</h1>
-      <div>
-        <label>
-          Length (m):
-          <select value={selectedLength} onChange={handleLengthChange}>
-            {lengths.map((length) => (
-              <option key={length} value={length}>
-                {length}
-              </option>
-            ))}
-          </select>
-        </label>
+    <>
+      <div className="container prod-page">
+        <div className="row">
+          <div className="col-md-6 col-12 left">
+            <img
+              className="prod-img"
+              src="/images/prod-img.png"
+              alt="Product Image"
+            />
+          </div>
+          <div className="col-md-6 col-12 right">
+            <h1 className="main-head">
+              Personnalisez votre <br /> EXEMPLE DE LA PLATEFORME
+            </h1>
+
+            <div className="dimensions">
+              <h2 className="sub-head">DIMENSIONS</h2>
+              <div className="row dim-cont">
+                <div className="col-6 sel-inp">
+                  <label className="labels">
+                    <span className="labels-head">Largeur</span>
+                    <br />
+                    max (3500mm)
+                  </label>
+                  <select
+                    className="field__input"
+                    value={selectedLength}
+                    onChange={handleLengthChange}
+                  >
+                    {lengths.map((length) => (
+                      <option key={length} value={length}>
+                        {length}
+                      </option>
+                    ))}
+                  </select>
+                  <p>
+                    Mesurez la largeur entre murs en 3 points et gardez la plus
+                    petite
+                  </p>
+                </div>
+                <div className="col-6 sel-inp">
+                  <label className="labels">
+                    <span className="labels-head">Hauteur</span>
+                    <br />
+                    max (3500mm)
+                  </label>
+                  <select
+                    className="field__input"
+                    value={selectedWidth}
+                    onChange={handleWidthChange}
+                  >
+                    {widths.map((width) => (
+                      <option key={width} value={width}>
+                        {width}
+                      </option>
+                    ))}
+                  </select>
+                  <p>
+                    Mesurez la hauteur entre murs en 3 points et gardez la plus
+                    petite
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <hr class="custom" />
+
+            <div className="colors">
+              <h1 className="sub-head">COULEURS</h1>
+
+              <div className="colors-container">
+                {colors.map((color) => (
+                  <div className="color-wrapper" key={color}>
+                    <input
+                      className="radio_opt"
+                      type="radio"
+                      value={color}
+                      id={`color-${color}`}
+                      checked={selectedColor === color}
+                      onChange={handleColorChange}
+                      required
+                    />
+                    <label
+                      className="color"
+                      htmlFor={`color-${color}`}
+                      style={{ backgroundColor: colorMap[color] }}
+                    ></label>
+                    <div className="color-label">{color}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <hr class="custom" />
+
+            <div className="motors">
+              <h1 className="sub-head">MOTEURS</h1>
+              <div className="motor-container">
+                {motors.map((motor) => (
+                  <label
+                    className={`radio-img-option ${
+                      selectedMotor && selectedMotor.name === motor.name
+                        ? "motor-selected"
+                        : ""
+                    }`}
+                    key={motor.name}
+                  >
+                    <input
+                      type="radio"
+                      value={motor.name}
+                      checked={
+                        selectedMotor && selectedMotor.name === motor.name
+                      }
+                      onChange={handleMotorChange}
+                      className="radio-img-radio"
+                    />
+                    <div className="radio-img-square">
+                      <img
+                        src={motor.imagePath}
+                        alt={`Image for ${motor.name}`}
+                        className="radio-img-image"
+                      />
+                      <span className="radio-img-text">{motor.name}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <hr class="custom" />
+
+            <div className="interrupteurs">
+              <h1 className="sub-head">INTERRUPTEURS</h1>
+              <div className="interrupteur-container">
+                <label
+                  className={`radio-img-option ${
+                    selectedInterrupteur === 1 ? "interrupteur-selected" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={1}
+                    className="radio-img-radio"
+                    checked={selectedInterrupteur === 1}
+                    onChange={handleInterrupteurChange}
+                  />
+                  <div className="radio-img-square">
+                    <img
+                      src="/images/inter-1.png"
+                      className="radio-img-image"
+                      alt="Interrupteur 1"
+                    />
+                    <span className="radio-img-text">
+                      Interrupteur Apparent
+                    </span>
+                  </div>
+                </label>
+                <label
+                  className={`radio-img-option ${
+                    selectedInterrupteur === 2 ? "interrupteur-selected" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={2}
+                    className="radio-img-radio"
+                    checked={selectedInterrupteur === 2}
+                    onChange={handleInterrupteurChange}
+                  />
+                  <div className="radio-img-square">
+                    <img
+                      src="/images/inter-2.png"
+                      className="radio-img-image"
+                      alt="Interrupteur 2"
+                    />
+                    <span className="radio-img-text">
+                      Interrupteur Encastré
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <hr class="custom" />
+
+            <div className="cables">
+              <h1 className="sub-head">SORITE DE CABLE</h1>
+              <div className="cables-container">
+                {cableTypes.map((cableType, index) => (
+                  <div className="cable-wrapper" key={index}>
+                    <input
+                      className="radio_opt"
+                      type="radio"
+                      value={cableType.name}
+                      id={`cable-${index}`}
+                      checked={selectedCableType === cableType.name}
+                      onChange={handleCableTypeChange}
+                      required
+                    />
+                    <label className="cable" htmlFor={`cable-${index}`}>
+                      <img
+                        src={cableType.imagePath}
+                        alt={`Cable ${index + 1}`}
+                      />
+                    </label>
+                    <div className="cable-label">{cableType.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <hr class="custom" />
+
+            <div className="total">
+              <h2 className="tot-text">
+                ${price.toFixed(2)}
+                <span>€</span>
+              </h2>
+            </div>
+
+            <div className="cart-button">
+              <button className="cart-btn">Ajouter au panier</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label>
-          Width (m):
-          <select value={selectedWidth} onChange={handleWidthChange}>
-            {widths.map((width) => (
-              <option key={width} value={width}>
-                {width}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          Color:
-          {colors.map((color) => (
-            <label key={color}>
-              <input
-                type="radio"
-                value={color}
-                checked={selectedColor === color}
-                onChange={handleColorChange}
-              />
-              {color}
-            </label>
-          ))}
-        </label>
-      </div>
-      <div>
-        <label>
-          Motor:
-          {motors.map((motor) => (
-            <label key={motor}>
-              <input
-                type="radio"
-                value={motor}
-                checked={selectedMotor === motor}
-                onChange={handleMotorChange}
-              />
-              {motor}
-            </label>
-          ))}
-        </label>
-      </div>
-      <div>
-        <h2>Total Price: ${price.toFixed(2)}</h2>
-      </div>
-    </div>
+    </>
   );
 };
 

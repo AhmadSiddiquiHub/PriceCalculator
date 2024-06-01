@@ -1,0 +1,313 @@
+.prod-page {
+  padding: 20px 0px;
+}
+
+.prod-img {
+  width: 100%;
+  max-height: 100%;
+}
+
+.dim-cont {
+  text-align: center;
+}
+
+.main-head {
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+  margin-bottom: 50px;
+}
+
+.sub-head {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+}
+
+.labels {
+  line-height: 20px;
+  margin-bottom: 30px;
+}
+
+.sel-inp p {
+  margin-top: 15px;
+  line-height: 18px;
+  font-size: 16px;
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+}
+
+hr.custom {
+  height: 3px;
+  background-color: black;
+  margin: 20px 0px;
+}
+
+.labels-head {
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+  font-size: 25px;
+}
+
+.field__input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 4px solid #fed702;
+  outline: none;
+  padding: 6px 10px;
+  font-size: 18px;
+}
+
+.colors-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.radio_opt {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  cursor: pointer;
+  display: none; /* Hide the actual radio button */
+}
+
+.color-wrapper {
+  flex: 0 0 20%; /* 100% divided by 5 items per row */
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+}
+
+.color {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #5b5555;
+  border: 6px solid #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Center the circle */
+  cursor: pointer;
+  transition: height 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+}
+
+.color-label {
+  margin-top: 10px;
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+}
+
+/* When the radio button is checked, increase the height of the circle */
+.radio_opt:checked + .color {
+  border-color: #fed702; /* Optional: Change border color for better visibility */
+}
+
+.radio-img-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.motor-container,
+.interrupteur-container {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+}
+
+.radio-img-option {
+  display: inline-block; /* Change to inline-block */
+  margin-right: 20px;
+}
+
+.radio-img-radio {
+  display: none; /* Hide the actual radio button */
+}
+
+.radio-img-square {
+  display: inline-flex; /* Change to inline-flex */
+  align-items: center;
+  justify-content: center; /* Center items horizontally */
+  cursor: pointer;
+  border: 2px solid #ccc; /* Add border to create a square */
+  border-radius: 12px; /* Add border radius to round corners */
+  padding: 20px 5px; /* Add padding for spacing */
+  max-width: 200px;
+}
+
+.radio-img-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  margin-right: 10px; /* Add margin right */
+}
+
+.radio-img-text {
+  font-size: 15px; /* Adjust text size as needed */
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+  text-align: center;
+}
+
+/* Add a class to style the highlighted motor square */
+.motor-selected {
+  background-color: #eaf6ff; /* Change the background color when selected */
+  border-color: #007bff; /* Change the border color when selected */
+}
+.interrupteur-selected {
+  background-color: #eaf6ff; /* Change the background color when selected */
+  border-color: #007bff; /* Change the border color when selected */
+}
+
+/* Style the radio button when checked */
+.radio-img-radio:checked + .radio-img-square {
+  background-color: #eaf6ff; /* Change the background color when checked */
+  border-color: #007bff; /* Change the border color when checked */
+}
+
+.cables {
+  margin-top: 20px;
+}
+
+.sub-head {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.cables-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cable-wrapper {
+  width: calc(33.33% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+/* Ensure only three cable options per row */
+.cable-wrapper:nth-child(3n) {
+  margin-right: 0;
+  text-align: center;
+}
+
+.radio_opt {
+  display: none; /* Hide the actual radio button */
+}
+
+.cable {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content vertically */
+  cursor: pointer;
+}
+
+.cable img {
+  max-width: 100%; /* Ensure the image does not exceed its container */
+  max-height: 100%; /* Ensure the image does not exceed its container */
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.cable-label {
+  text-align: center;
+}
+
+/* Style the cable image when checked */
+.radio_opt:checked + .cable img {
+  border-color: #007bff; /* Change border color when selected */
+}
+
+/* Style the cable wrapper when checked */
+.radio_opt:checked + .cable-wrapper {
+  background-color: #f8f9fa; /* Change background color when selected */
+}
+
+.total {
+  width: 100%;
+  background-color: #e6e6e6;
+  padding: 30px 0px;
+
+  .tot-text {
+    color: #333e48;
+    font-weight: 500;
+    font-family: "Inter";
+    font-size: 60px;
+    text-align: center;
+  }
+}
+
+.cart-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.cart-btn {
+  font-size: 25px;
+  color: #333e48;
+  font-weight: 400;
+  font-family: "Inter";
+  padding: 0px 20px;
+  border-radius: 20px;
+  background-color: #fed702;
+  border: 1px solid#fed702;
+
+  &:hover {
+    border: 2px solid#000000;
+  }
+}
+
+/* For small devices (e.g., phones) */
+@media only screen and (max-width: 600px) {
+  .prod-page {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+  .col-md-6 {
+    width: 100%; /* Make columns full width on small screens */
+  }
+  .sel-inp {
+    margin-bottom: 20px; /* Add spacing between input sections */
+  }
+  .radio-img-option {
+    margin-right: 10px; /* Adjust spacing between motor options */
+  }
+  .motor-container,
+  .interrupteur-container {
+    flex-direction: column; /* Change direction to column for mobile devices */
+    align-items: center; /* Center items horizontally */
+  }
+  .radio-img-option {
+    margin-bottom: 10px;
+  }
+  .main-head {
+    margin-top: 15px;
+  }
+}
+
+/* For medium devices (e.g., tablets) */
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+  .sel-inp {
+    margin-bottom: 30px; /* Increase spacing between input sections */
+  }
+  .radio-img-option {
+    margin-right: 15px; /* Adjust spacing between motor options */
+  }
+}
+
+/* For large devices (e.g., desktops) */
+@media only screen and (min-width: 993px) {
+  .container {
+    max-width: 1200px; /* Limit container width for better readability */
+    margin: 0 auto; /* Center the container */
+  }
+}
