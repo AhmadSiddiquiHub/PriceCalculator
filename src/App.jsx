@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./components/Header";
 
 // Length and Width arrays
 const lengths = [
@@ -143,6 +144,7 @@ const PriceCalculator = () => {
 
   return (
     <>
+      <Header />
       <div className="container prod-page">
         <div className="row">
           <div className="col-md-6 col-12 left">

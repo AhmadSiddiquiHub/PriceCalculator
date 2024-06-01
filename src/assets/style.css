@@ -267,6 +267,108 @@ hr.custom {
   }
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1); /* Add shadow effect with larger blur radius and reduced opacity */
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+.search-bar input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-icon img {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.cart-icon span {
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+.logo-text {
+  font-size: 30px;
+  color: #323f48;
+  font-weight: 700;
+}
+
+.logo-text span {
+  color: #fed702;
+  font-weight: 300;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-icon span {
+  position: absolute;
+  bottom: -8px; /* Adjust vertical position */
+  right: -8px; /* Adjust horizontal position */
+  background-color: #fed702; /* Background color for the count */
+  color: #000000; /* Text color for the count */
+  border-radius: 50%; /* Make it circular */
+  padding: 4px 8px; /* Add some padding */
+  font-size: 12px; /* Adjust font size */
+}
+
+.search-bar {
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  outline: none;
+  border: 1px solid #fed702;
+  margin: 0px 10px;
+}
+
+.search-bar input[type="text"] {
+  outline: none;
+  width: 600px; /* Set a fixed width */
+  /* padding: 10px; */
+  border: none;
+  border-radius: 20px 0 0 20px; /* Round only the left corners */
+}
+
+.search-bar button {
+  width: 10%; /* Adjust width accordingly */
+  /* padding: 10px 20px; */
+  border: none;
+  background-color: #fed702; /* Example background color */
+  color: white;
+  border-radius: 0 20px 20px 0; /* Round only the right corners */
+  cursor: pointer;
+}
+
+.search-bar-mobile {
+  display: none;
+}
+
 /* For small devices (e.g., phones) */
 @media only screen and (max-width: 600px) {
   .prod-page {
@@ -291,6 +393,9 @@ hr.custom {
   }
   .main-head {
     margin-top: 15px;
+  }
+  .search-bar {
+    display: none;
   }
 }
 
