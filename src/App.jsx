@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 
 // Length and Width arrays
 const lengths = [
-  0.8, 0.197, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2,
-  2.3, 2.4, 2.5, 2.6,
+  197, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000,
+  2100, 2200, 2300, 2400, 2500, 2600, 2700,
 ];
-const widths = [0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9];
+const widths = [
+  800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900,
+];
 
-// Price matrix
 const prices = [
   [208, 219, 231, 242, 253, 264, 275, 287, 298, 309, 319],
   [205, 217, 228, 240, 251, 263, 274, 285, 298, 309, 320, 331],
@@ -85,18 +86,22 @@ const PriceCalculator = () => {
   const [selectedMotor, setSelectedMotor] = useState(null);
   const [selectedInterrupteur, setSelectedInterrupteur] = useState(null);
   const [selectedCableType, setSelectedCableType] = useState("");
-  const [price, setPrice] = useState(prices[0][0]);
+  const [price, setPrice] = useState(null);
 
   const handleLengthChange = (e) => {
     const newLength = parseFloat(e.target.value);
-    setSelectedLength(newLength);
-    updatePrice(newLength, selectedWidth, selectedColor, selectedMotor);
+    if (!isNaN(newLength)) {
+      setSelectedLength(newLength);
+      updatePrice(newLength, selectedWidth, selectedColor, selectedMotor);
+    }
   };
 
   const handleWidthChange = (e) => {
     const newWidth = parseFloat(e.target.value);
-    setSelectedWidth(newWidth);
-    updatePrice(selectedLength, newWidth, selectedColor, selectedMotor);
+    if (!isNaN(newWidth)) {
+      setSelectedWidth(newWidth);
+      updatePrice(selectedLength, newWidth, selectedColor, selectedMotor);
+    }
   };
 
   const handleColorChange = (e) => {
@@ -122,11 +127,25 @@ const PriceCalculator = () => {
     setSelectedCableType(cableType);
   };
 
+  const findIndexInRange = (value, array) => {
+    for (let i = 0; i < array.length - 1; i++) {
+      if (value >= array[i] && value < array[i + 1]) {
+        return i;
+      }
+    }
+    if (value >= array[array.length - 1]) {
+      return array.length - 1;
+    }
+    return -1;
+  };
+
   const updatePrice = (length, width, color, motor) => {
-    const lengthIndex = lengths.indexOf(length);
-    const widthIndex = widths.indexOf(width);
+    const lengthIndex = findIndexInRange(length, lengths);
+    const widthIndex = findIndexInRange(width, widths);
+
     if (lengthIndex !== -1 && widthIndex !== -1) {
       let basePrice = prices[lengthIndex][widthIndex];
+
       if (colors.indexOf(color) > 1) {
         basePrice += basePrice * 0.12;
       }
@@ -139,8 +158,14 @@ const PriceCalculator = () => {
         }
       }
       setPrice(basePrice);
+    } else {
+      setPrice(null);
     }
   };
+
+  useEffect(() => {
+    updatePrice(selectedLength, selectedWidth, selectedColor, selectedMotor);
+  }, [selectedLength, selectedWidth, selectedColor, selectedMotor]);
 
   return (
     <>
@@ -166,19 +191,17 @@ const PriceCalculator = () => {
                   <label className="labels">
                     <span className="labels-head">Largeur</span>
                     <br />
-                    max (3500mm)
+                    min (197m) & max (2500m)
                   </label>
-                  <select
+                  <input
+                    type="number"
                     className="field__input"
                     value={selectedLength}
+                    min={Math.min(...lengths)}
+                    max={Math.max(...lengths)}
+                    step="0.1"
                     onChange={handleLengthChange}
-                  >
-                    {lengths.map((length) => (
-                      <option key={length} value={length}>
-                        {length}
-                      </option>
-                    ))}
-                  </select>
+                  />
                   <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
                     petite
@@ -188,19 +211,17 @@ const PriceCalculator = () => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    max (3500mm)
+                    min (800m) & max (1900m)
                   </label>
-                  <select
+                  <input
+                    type="number"
                     className="field__input"
                     value={selectedWidth}
+                    min={Math.min(...widths)}
+                    max={Math.max(...widths)}
+                    step="0.1"
                     onChange={handleWidthChange}
-                  >
-                    {widths.map((width) => (
-                      <option key={width} value={width}>
-                        {width}
-                      </option>
-                    ))}
-                  </select>
+                  />
                   <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus
                     petite
@@ -359,8 +380,9 @@ const PriceCalculator = () => {
 
             <div className="total">
               <h2 className="tot-text">
-                ${price.toFixed(2)}
-                <span>€</span>
+                {price !== null
+                  ? `$${price.toFixed(2)}€`
+                  : "Price not available"}
               </h2>
             </div>
 
