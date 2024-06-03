@@ -149,8 +149,12 @@ const PriceCalculator = () => {
       if (colors.indexOf(color) > 1) {
         basePrice += basePrice * 0.12;
       }
+
+      const lengthInMeters = length / 1000;
+      const widthInMeters = width / 1000;
+      const area = lengthInMeters * widthInMeters * 3;
+
       if (motor) {
-        const area = length * width * 3;
         if (motor.name === "Moteur Filaire (commande via interrupteur)") {
           basePrice += area < 15 ? 10 : 21;
         } else if (motor.name === "Moteur Télécommandé") {
@@ -191,7 +195,7 @@ const PriceCalculator = () => {
                   <label className="labels">
                     <span className="labels-head">Largeur</span>
                     <br />
-                    min (197m) & max (2500m)
+                    Min (197m) & Max (2500m)
                   </label>
                   <input
                     type="number"
@@ -211,7 +215,7 @@ const PriceCalculator = () => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    min (800m) & max (1900m)
+                    Min (800m) & Max (1900m)
                   </label>
                   <input
                     type="number"
@@ -296,7 +300,7 @@ const PriceCalculator = () => {
 
             <hr class="custom" />
 
-            <div className="interrupteurs">
+            {/* <div className="interrupteurs">
               <h1 className="sub-head">INTERRUPTEURS</h1>
               <div className="interrupteur-container">
                 <label
@@ -348,7 +352,7 @@ const PriceCalculator = () => {
               </div>
             </div>
 
-            <hr class="custom" />
+            <hr class="custom" /> */}
 
             <div className="cables">
               <h1 className="sub-head">SORITE DE CABLE</h1>
