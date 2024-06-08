@@ -6,9 +6,11 @@ const Header = () => {
     <header className="header-main">
       <div className="header">
         <div className="logo">
-          <h1 className="logo-text">
-            VoletMarket<span>.be</span>
-          </h1>
+          <img
+            src="/images/logo.png"
+            alt="VoletMarket.be"
+            style={{ width: "200px" }}
+          />
         </div>
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
