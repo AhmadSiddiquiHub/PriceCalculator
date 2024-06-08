@@ -1,5 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.container {
+  max-width: 950px !important;
+}
+
 .prod-page {
-  padding: 20px 0px;
+  padding: 30px 0px;
 }
 
 .prod-img {
@@ -13,29 +25,32 @@
 
 .main-head {
   color: #333e48;
-  font-weight: 400;
   font-family: "Inter";
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
 .sub-head {
-  font-size: 30px;
+  font-size: 20px !important;
   margin-top: 20px;
   margin-bottom: 25px;
   color: #333e48;
-  font-weight: 400;
+  font-weight: bolder;
   font-family: "Inter";
 }
 
 .labels {
   line-height: 20px;
   margin-bottom: 30px;
+  margin-top: 25px;
+  font-size: 12px;
 }
 
 .sel-inp p {
   margin-top: 15px;
   line-height: 18px;
-  font-size: 16px;
+  font-size: 10px;
   color: #333e48;
   font-weight: 400;
   font-family: "Inter";
@@ -49,19 +64,19 @@ hr.custom {
 
 .labels-head {
   color: #333e48;
-  font-weight: 400;
+  font-weight: bolder;
   font-family: "Inter";
-  font-size: 25px;
+  font-size: 18px !important;
 }
 
 .field__input {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 50px;
   border: 4px solid #fed702;
   outline: none;
   padding: 6px 10px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .colors-container {
@@ -85,8 +100,8 @@ hr.custom {
 }
 
 .color {
-  width: 90px;
-  height: 90px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-color: #5b5555;
   border: 6px solid #cccccc;
@@ -101,8 +116,9 @@ hr.custom {
 .color-label {
   margin-top: 10px;
   color: #333e48;
-  font-weight: 400;
+  font-weight: 900;
   font-family: "Inter";
+  font-size: 9px;
 }
 
 /* When the radio button is checked, increase the height of the circle */
@@ -135,41 +151,37 @@ hr.custom {
   align-items: center;
   justify-content: center; /* Center items horizontally */
   cursor: pointer;
-  border: 2px solid #ccc; /* Add border to create a square */
+  border: 3px solid #ccc; /* Add border to create a square */
   border-radius: 12px; /* Add border radius to round corners */
-  padding: 20px 5px; /* Add padding for spacing */
+  padding: 10px 5px; /* Add padding for spacing */
   max-width: 200px;
 }
 
 .radio-img-image {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 10px;
   margin-right: 10px; /* Add margin right */
 }
 
 .radio-img-text {
-  font-size: 15px; /* Adjust text size as needed */
+  font-size: 12px;
   color: #333e48;
-  font-weight: 400;
-  font-family: "Inter";
+  font-weight: bolder;
   text-align: center;
 }
 
 /* Add a class to style the highlighted motor square */
 .motor-selected {
-  background-color: #eaf6ff; /* Change the background color when selected */
-  border-color: #007bff; /* Change the border color when selected */
+  border-color: #fed702; /* Change the border color when selected */
 }
 .interrupteur-selected {
-  background-color: #eaf6ff; /* Change the background color when selected */
-  border-color: #007bff; /* Change the border color when selected */
+  border-color: #fed702; /* Change the border color when selected */
 }
 
 /* Style the radio button when checked */
 .radio-img-radio:checked + .radio-img-square {
-  background-color: #eaf6ff; /* Change the background color when checked */
-  border-color: #007bff; /* Change the border color when checked */
+  border-color: #fed702; /* Change the border color when checked */
 }
 
 .cables {
@@ -212,18 +224,20 @@ hr.custom {
 .cable img {
   max-width: 100%; /* Ensure the image does not exceed its container */
   max-height: 100%; /* Ensure the image does not exceed its container */
-  border: 2px solid transparent;
-  border-radius: 8px;
+  border: 3px solid transparent;
+  border-radius: 50%;
   transition: border-color 0.3s ease;
 }
 
 .cable-label {
   text-align: center;
+  font-size: 12px;
+  font-weight: bolder;
 }
 
 /* Style the cable image when checked */
 .radio_opt:checked + .cable img {
-  border-color: #007bff; /* Change border color when selected */
+  border-color: #fed702; /* Change border color when selected */
 }
 
 /* Style the cable wrapper when checked */
@@ -238,8 +252,7 @@ hr.custom {
 
   .tot-text {
     color: #333e48;
-    font-weight: 500;
-    font-family: "Inter";
+    font-weight: bolder;
     font-size: 60px;
     text-align: center;
   }
@@ -253,9 +266,9 @@ hr.custom {
 }
 
 .cart-btn {
-  font-size: 25px;
+  font-size: 22px;
   color: #333e48;
-  font-weight: 400;
+  font-weight: bolder;
   font-family: "Inter";
   padding: 0px 20px;
   border-radius: 20px;
@@ -265,6 +278,11 @@ hr.custom {
   &:hover {
     border: 2px solid#000000;
   }
+}
+
+.header-main {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header {

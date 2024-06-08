@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 
 // Length and Width arrays
-const lengths = [
+const widths = [
   197, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000,
   2100, 2200, 2300, 2400, 2500, 2600, 2700,
 ];
-const widths = [
+const lengths = [
   800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900,
 ];
 
@@ -64,11 +64,58 @@ const colors = [
 // Motors array
 const motors = [
   {
+    id: 1,
     name: "Moteur Filaire (commande via interrupteur)",
     imagePath: "/images/mot-1.png",
   },
-  { name: "Moteur Télécommandé", imagePath: "/images/mot-2.png" },
+  { id: 2, name: "Moteur Télécommandé", imagePath: "/images/mot-2.png" },
 ];
+
+// Motors array
+const interrupteurs_a = [
+  {
+    id: 1,
+    name: "Interrupteur Apparent",
+    imagePath: "/images/inter-1.png",
+    price: 15, // Add the price property here
+  },
+  {
+    id: 2,
+    name: "Interrupteur Encastré",
+    imagePath: "/images/inter-2.png",
+    price: 15,
+  },
+];
+
+const interrupteurs_b = [
+  {
+    id: 1,
+    name: "Télécommande One",
+    imagePath: "/images/inter-b-1.png",
+    price: 35,
+  },
+  {
+    id: 2,
+    name: "Télécommande Multi 16 canaux",
+    imagePath: "/images/inter-b-1.png",
+    price: 35,
+  },
+  {
+    id: 3,
+    name: "Télécommande Multi timer 16 canaux",
+    imagePath: "/images/inter-b-1.png",
+    price: 35,
+  },
+  {
+    id: 4,
+    name: "Télécommande mini",
+    imagePath: "/images/inter-b-2.png",
+    price: 35,
+  },
+];
+
+// Interrupteurs arrays for each motor type
+const interrupteurs = [interrupteurs_a, interrupteurs_b];
 
 const cableTypes = [
   { name: "Haut droit", imagePath: "/images/edge-1.png" },
@@ -83,9 +130,11 @@ const PriceCalculator = () => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
   const [selectedWidth, setSelectedWidth] = useState(widths[0]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
-  const [selectedMotor, setSelectedMotor] = useState(null);
+  const [selectedMotor, setSelectedMotor] = useState(motors[0]);
   const [selectedInterrupteur, setSelectedInterrupteur] = useState(null);
-  const [selectedCableType, setSelectedCableType] = useState("");
+  const [selectedCableType, setSelectedCableType] = useState(
+    cableTypes[0].name
+  );
   const [price, setPrice] = useState(null);
 
   const handleLengthChange = (e) => {
@@ -114,12 +163,33 @@ const PriceCalculator = () => {
     const newMotorName = e.target.value;
     const newMotor = motors.find((motor) => motor.name === newMotorName);
     setSelectedMotor(newMotor);
+    setSelectedInterrupteur(null);
     updatePrice(selectedLength, selectedWidth, selectedColor, newMotor);
   };
 
+  // const handleMotorChange = (e) => {
+  //   const newMotorName = e.target.value;
+  //   const newMotor = motors.find((motor) => motor.name === newMotorName);
+  //   setSelectedMotor(newMotor);
+  //   updatePrice(selectedLength, selectedWidth, selectedColor, newMotor);
+  // };
+
+  // const handleInterrupteurChange = (e) => {
+  //   const selectedValue = parseInt(e.target.value);
+  //   setSelectedInterrupteur(selectedValue);
+  // };
+
   const handleInterrupteurChange = (e) => {
     const selectedValue = parseInt(e.target.value);
+    console.log("Selected: ", selectedValue);
     setSelectedInterrupteur(selectedValue);
+    updatePrice(
+      selectedLength,
+      selectedWidth,
+      selectedColor,
+      selectedMotor,
+      selectedValue
+    );
   };
 
   const handleCableTypeChange = (e) => {
@@ -139,13 +209,14 @@ const PriceCalculator = () => {
     return -1;
   };
 
-  const updatePrice = (length, width, color, motor) => {
+  const updatePrice = (length, width, color, motor, interrupteur) => {
     const lengthIndex = findIndexInRange(length, lengths);
     const widthIndex = findIndexInRange(width, widths);
 
     if (lengthIndex !== -1 && widthIndex !== -1) {
       let basePrice = prices[lengthIndex][widthIndex];
 
+      // Adjust base price based on color
       if (colors.indexOf(color) > 1) {
         basePrice += basePrice * 0.12;
       }
@@ -154,6 +225,7 @@ const PriceCalculator = () => {
       const widthInMeters = width / 1000;
       const area = lengthInMeters * widthInMeters * 3;
 
+      // Add motor price
       if (motor) {
         if (motor.name === "Moteur Filaire (commande via interrupteur)") {
           basePrice += area < 15 ? 10 : 21;
@@ -161,11 +233,49 @@ const PriceCalculator = () => {
           basePrice += area < 15 ? 21 : 81;
         }
       }
+
+      // Add interrupteur price if selected
+      if (interrupteur) {
+        const inter = interrupteurs[motor.id - 1];
+        const interPrice = inter[interrupteur - 1].price;
+        console.log(interPrice);
+        basePrice += interPrice;
+      }
+
       setPrice(basePrice);
     } else {
       setPrice(null);
     }
   };
+
+  // const updatePrice = (length, width, color, motor) => {
+  //   const lengthIndex = findIndexInRange(length, lengths);
+  //   const widthIndex = findIndexInRange(width, widths);
+
+  //   if (lengthIndex !== -1 && widthIndex !== -1) {
+  //     let basePrice = prices[lengthIndex][widthIndex];
+
+  //     if (colors.indexOf(color) > 1) {
+  //       basePrice += basePrice * 0.12;
+  //     }
+
+  //     const lengthInMeters = length / 1000;
+  //     const widthInMeters = width / 1000;
+  //     const area = lengthInMeters * widthInMeters * 3;
+
+  //     console.log("Motor Value: ", motor);
+  // if (motor) {
+  //   if (motor.name === "Moteur Filaire (commande via interrupteur)") {
+  //     basePrice += area < 15 ? 10 : 21;
+  //   } else if (motor.name === "Moteur Télécommandé") {
+  //     basePrice += area < 15 ? 21 : 81;
+  //   }
+  // }
+  //     setPrice(basePrice);
+  //   } else {
+  //     setPrice(null);
+  //   }
+  // };
 
   useEffect(() => {
     updatePrice(selectedLength, selectedWidth, selectedColor, selectedMotor);
@@ -195,7 +305,7 @@ const PriceCalculator = () => {
                   <label className="labels">
                     <span className="labels-head">Largeur</span>
                     <br />
-                    Min (197m) & Max (2500m)
+                    Min (800m) & Max (1900m)
                   </label>
                   <input
                     type="number"
@@ -215,7 +325,7 @@ const PriceCalculator = () => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    Min (800m) & Max (1900m)
+                    Min (197m) & Max (2500m)
                   </label>
                   <input
                     type="number"
@@ -234,7 +344,7 @@ const PriceCalculator = () => {
               </div>
             </div>
 
-            <hr class="custom" />
+            <hr className="custom" />
 
             <div className="colors">
               <h1 className="sub-head">COULEURS</h1>
@@ -262,7 +372,7 @@ const PriceCalculator = () => {
               </div>
             </div>
 
-            <hr class="custom" />
+            <hr className="custom" />
 
             <div className="motors">
               <h1 className="sub-head">MOTEURS</h1>
@@ -298,61 +408,220 @@ const PriceCalculator = () => {
               </div>
             </div>
 
-            <hr class="custom" />
+            {/* {selectedMotor && (
+              <>
+                <hr className="custom" />
 
-            {/* <div className="interrupteurs">
-              <h1 className="sub-head">INTERRUPTEURS</h1>
-              <div className="interrupteur-container">
-                <label
-                  className={`radio-img-option ${
-                    selectedInterrupteur === 1 ? "interrupteur-selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    value={1}
-                    className="radio-img-radio"
-                    checked={selectedInterrupteur === 1}
-                    onChange={handleInterrupteurChange}
-                  />
-                  <div className="radio-img-square">
-                    <img
-                      src="/images/inter-1.png"
-                      className="radio-img-image"
-                      alt="Interrupteur 1"
-                    />
-                    <span className="radio-img-text">
-                      Interrupteur Apparent
-                    </span>
-                  </div>
-                </label>
-                <label
-                  className={`radio-img-option ${
-                    selectedInterrupteur === 2 ? "interrupteur-selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    value={2}
-                    className="radio-img-radio"
-                    checked={selectedInterrupteur === 2}
-                    onChange={handleInterrupteurChange}
-                  />
-                  <div className="radio-img-square">
-                    <img
-                      src="/images/inter-2.png"
-                      className="radio-img-image"
-                      alt="Interrupteur 2"
-                    />
-                    <span className="radio-img-text">
-                      Interrupteur Encastré
-                    </span>
-                  </div>
-                </label>
-              </div>
-            </div>
+                <div className="interrupteurs">
+                  <h1 className="sub-head">INTERRUPTEURS</h1>
+                  {selectedMotor?.id == 1 && (
+                    <div className="first-inter">
+                      <div className="interrupteur-container">
+                        <label
+                          className={`radio-img-option ${
+                            selectedInterrupteur === 1
+                              ? "interrupteur-selected"
+                              : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            value={1}
+                            className="radio-img-radio"
+                            checked={selectedInterrupteur === 1}
+                            onChange={handleInterrupteurChange}
+                          />
+                          <div className="radio-img-square">
+                            <img
+                              src="/images/inter-1.png"
+                              className="radio-img-image"
+                              alt="Interrupteur 1"
+                            />
+                            <span className="radio-img-text">
+                              Interrupteur Apparent
+                            </span>
+                          </div>
+                        </label>
+                        <label
+                          className={`radio-img-option ${
+                            selectedInterrupteur === 2
+                              ? "interrupteur-selected"
+                              : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            value={2}
+                            className="radio-img-radio"
+                            checked={selectedInterrupteur === 2}
+                            onChange={handleInterrupteurChange}
+                          />
+                          <div className="radio-img-square">
+                            <img
+                              src="/images/inter-2.png"
+                              className="radio-img-image"
+                              alt="Interrupteur 2"
+                            />
+                            <span className="radio-img-text">
+                              Interrupteur Encastré
+                            </span>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  )}
 
-            <hr class="custom" /> */}
+                  {selectedMotor?.id == 2 && (
+                    <div className="second-inter">
+                      <div className="interrupteur-container">
+                        <label
+                          className={`radio-img-option ${
+                            selectedInterrupteur === 1
+                              ? "interrupteur-selected"
+                              : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            value={1}
+                            className="radio-img-radio"
+                            checked={selectedInterrupteur === 1}
+                            onChange={handleInterrupteurChange}
+                          />
+                          <div className="radio-img-square">
+                            <img
+                              src="/images/inter-1.png"
+                              className="radio-img-image"
+                              alt="Interrupteur 1"
+                            />
+                            <span className="radio-img-text">
+                              Interrupteur Apparent
+                            </span>
+                          </div>
+                        </label>
+                        <label
+                          className={`radio-img-option ${
+                            selectedInterrupteur === 2
+                              ? "interrupteur-selected"
+                              : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            value={2}
+                            className="radio-img-radio"
+                            checked={selectedInterrupteur === 2}
+                            onChange={handleInterrupteurChange}
+                          />
+                          <div className="radio-img-square">
+                            <img
+                              src="/images/inter-2.png"
+                              className="radio-img-image"
+                              alt="Interrupteur 2"
+                            />
+                            <span className="radio-img-text">
+                              Interrupteur Encastré
+                            </span>
+                          </div>
+                        </label>
+                        <label
+                          className={`radio-img-option ${
+                            selectedInterrupteur === 2
+                              ? "interrupteur-selected"
+                              : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            value={2}
+                            className="radio-img-radio"
+                            checked={selectedInterrupteur === 2}
+                            onChange={handleInterrupteurChange}
+                          />
+                          <div className="radio-img-square">
+                            <img
+                              src="/images/inter-2.png"
+                              className="radio-img-image"
+                              alt="Interrupteur 2"
+                            />
+                            <span className="radio-img-text">
+                              Interrupteur Encastré
+                            </span>
+                          </div>
+                        </label>
+                        <label
+                          className={`radio-img-option ${
+                            selectedInterrupteur === 2
+                              ? "interrupteur-selected"
+                              : ""
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            value={2}
+                            className="radio-img-radio"
+                            checked={selectedInterrupteur === 2}
+                            onChange={handleInterrupteurChange}
+                          />
+                          <div className="radio-img-square">
+                            <img
+                              src="/images/inter-2.png"
+                              className="radio-img-image"
+                              alt="Interrupteur 2"
+                            />
+                            <span className="radio-img-text">
+                              Interrupteur Encastré
+                            </span>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )} */}
+
+            {selectedMotor && (
+              <>
+                <hr className="custom" />
+                <div className="interrupteurs">
+                  <h1 className="sub-head">INTERRUPTEURS</h1>
+                  <div className="interrupteur-container">
+                    {interrupteurs[selectedMotor.id - 1].map((interrupteur) => (
+                      <label
+                        className={`radio-img-option ${
+                          selectedInterrupteur === interrupteur.id
+                            ? "interrupteur-selected"
+                            : ""
+                        }`}
+                        key={interrupteur.id}
+                      >
+                        <input
+                          type="radio"
+                          value={interrupteur.id}
+                          checked={selectedInterrupteur === interrupteur.id}
+                          onChange={handleInterrupteurChange}
+                          className="radio-img-radio"
+                        />
+                        <div className="radio-img-square">
+                          <img
+                            src={interrupteur.imagePath}
+                            className="radio-img-image"
+                            alt={`Interrupteur ${interrupteur.id}`}
+                          />
+                          <span className="radio-img-text">
+                            {interrupteur.name} -{" "}
+                            {selectedMotor.id === 1 ? 15 : 35}
+                          </span>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            <hr className="custom" />
 
             <div className="cables">
               <h1 className="sub-head">SORITE DE CABLE</h1>
@@ -380,7 +649,7 @@ const PriceCalculator = () => {
               </div>
             </div>
 
-            <hr class="custom" />
+            <hr className="custom" />
 
             <div className="total">
               <h2 className="tot-text">
