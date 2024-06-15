@@ -234,33 +234,67 @@ const ProductScreen1 = () => {
   );
   const [price, setPrice] = useState(null);
 
+  // const handleLengthChange = (e) => {
+  //   const newLength = parseFloat(e.target.value);
+  //   if (!isNaN(newLength)) {
+  //     setSelectedLength(newLength);
+  //     updatePrice(
+  //       newLength,
+  //       selectedWidth,
+  //       selectedColor,
+  //       selectedMotor,
+  //       selectedInterrupteur
+  //     );
+  //   }
+  // };
+
   const handleLengthChange = (e) => {
-    const newLength = parseFloat(e.target.value);
-    if (!isNaN(newLength)) {
-      setSelectedLength(newLength);
-      updatePrice(
-        newLength,
-        selectedWidth,
-        selectedColor,
-        selectedMotor,
-        selectedInterrupteur
-      );
+    const value = e.target.value;
+    if (value === "" || /^-?\d*\.?\d*$/.test(value)) {
+      setSelectedLength(value);
+      const newLength = parseFloat(value);
+      if (!isNaN(newLength)) {
+        updatePrice(
+          newLength,
+          selectedWidth,
+          selectedColor,
+          selectedMotor,
+          selectedInterrupteur
+        );
+      }
     }
   };
 
   const handleWidthChange = (e) => {
-    const newWidth = parseFloat(e.target.value);
-    if (!isNaN(newWidth)) {
-      setSelectedWidth(newWidth);
-      updatePrice(
-        selectedLength,
-        newWidth,
-        selectedColor,
-        selectedMotor,
-        selectedInterrupteur
-      );
+    const value = e.target.value;
+    if (value === "" || /^-?\d*\.?\d*$/.test(value)) {
+      setSelectedWidth(value);
+      const newWidth = parseFloat(value);
+      if (!isNaN(newWidth)) {
+        updatePrice(
+          selectedLength,
+          newWidth,
+          selectedColor,
+          selectedMotor,
+          selectedInterrupteur
+        );
+      }
     }
   };
+
+  // const handleWidthChange = (e) => {
+  //   const newWidth = parseFloat(e.target.value);
+  //   if (!isNaN(newWidth)) {
+  //     setSelectedWidth(newWidth);
+  //     updatePrice(
+  //       selectedLength,
+  //       newWidth,
+  //       selectedColor,
+  //       selectedMotor,
+  //       selectedInterrupteur
+  //     );
+  //   }
+  // };
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
