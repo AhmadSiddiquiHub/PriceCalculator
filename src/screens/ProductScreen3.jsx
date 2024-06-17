@@ -35,30 +35,10 @@ const prices = [
 // Define a color map object
 const colorMap = {
   Blanc: "#ffffff",
-  "Maron Jamaique": "#5b5454",
-  "Blanc Crème": "#dfd9c3",
-  "Beige Clair": "#dfcdac",
-  Naturel: "#c0beba",
-  "Gris Clair": "#a6a89b",
-  "Gris Basalte": "#6f7473",
-  "Gris Quartz": "#857c71",
-  "Gris Anthracite": "#363b3b",
-  Noir: "#000000",
 };
 
 // Colors array
-const colors = [
-  "Blanc",
-  "Maron Jamaique",
-  "Blanc Crème",
-  "Beige Clair",
-  "Naturel",
-  "Gris Clair",
-  "Gris Basalte",
-  "Gris Quartz",
-  "Gris Anthracite",
-  "Noir",
-];
+const colors = ["Blanc"];
 
 // Motors array
 const motors = [
@@ -91,25 +71,25 @@ const interrupteurs_b = [
     id: 1,
     name: "Télécommande One",
     imagePath: "/images/inter-b-1.png",
-    price: 35,
+    price: 40,
   },
   {
     id: 2,
     name: "Télécommande Multi 16 canaux",
     imagePath: "/images/inter-b-1.png",
-    price: 35,
+    price: 115,
   },
   {
     id: 3,
     name: "Télécommande Multi timer 16 canaux",
     imagePath: "/images/inter-b-1.png",
-    price: 35,
+    price: 230,
   },
   {
     id: 4,
     name: "Télécommande mini",
     imagePath: "/images/inter-b-2.png",
-    price: 35,
+    price: 70,
   },
 ];
 
@@ -438,8 +418,7 @@ const ProductScreen3 = () => {
                             alt={`Interrupteur ${interrupteur.id}`}
                           />
                           <span className="radio-img-text">
-                            {interrupteur.name} -{" "}
-                            {selectedMotor.id === 1 ? 15 : 35}
+                            {interrupteur.name}
                           </span>
                         </div>
                       </label>

@@ -205,25 +205,25 @@ const interrupteurs_b = [
     id: 1,
     name: "Télécommande One",
     imagePath: "/images/inter-b-1.png",
-    price: 35,
+    price: 40,
   },
   {
     id: 2,
     name: "Télécommande Multi 16 canaux",
     imagePath: "/images/inter-b-1.png",
-    price: 35,
+    price: 115,
   },
   {
     id: 3,
     name: "Télécommande Multi timer 16 canaux",
     imagePath: "/images/inter-b-1.png",
-    price: 35,
+    price: 230,
   },
   {
     id: 4,
     name: "Télécommande mini",
     imagePath: "/images/inter-b-2.png",
-    price: 35,
+    price: 70,
   },
 ];
 
@@ -347,7 +347,7 @@ const ProductScreen4 = () => {
 
       const lengthInMeters = length / 1000;
       const widthInMeters = width / 1000;
-      const area = lengthInMeters * widthInMeters * 3;
+      const area = lengthInMeters * widthInMeters * 5;
 
       // Add motor price
       if (motor) {
@@ -552,8 +552,7 @@ const ProductScreen4 = () => {
                             alt={`Interrupteur ${interrupteur.id}`}
                           />
                           <span className="radio-img-text">
-                            {interrupteur.name} -{" "}
-                            {selectedMotor.id === 1 ? 15 : 35}
+                            {interrupteur.name}
                           </span>
                         </div>
                       </label>
