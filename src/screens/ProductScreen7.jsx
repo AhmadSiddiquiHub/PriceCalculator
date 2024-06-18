@@ -227,7 +227,12 @@ const ProductScreen3 = () => {
     const lengthIndex = findIndexInRange(length, lengths);
     const widthIndex = findIndexInRange(width, widths);
 
-    if (lengthIndex !== -1 && widthIndex !== -1) {
+    if (
+      lengthIndex !== -1 &&
+      widthIndex !== -1 &&
+      prices[lengthIndex] &&
+      prices[lengthIndex][widthIndex] !== undefined
+    ) {
       let basePrice = prices[lengthIndex][widthIndex];
 
       // Adjust base price based on color
@@ -273,11 +278,11 @@ const ProductScreen3 = () => {
                   <input
                     type="number"
                     className="field__input"
-                    value={selectedLength}
-                    min={Math.min(...lengths)}
-                    max={Math.max(...lengths)}
+                    value={selectedWidth}
+                    min={Math.min(...widths)}
+                    max={Math.max(...widths)}
                     step="0.1"
-                    onChange={handleLengthChange}
+                    onChange={handleWidthChange}
                   />
                   <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
@@ -288,16 +293,16 @@ const ProductScreen3 = () => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    Min (800m) & Max (3500m)
+                    Min (800m) & Max (4600m)
                   </label>
                   <input
                     type="number"
                     className="field__input"
-                    value={selectedWidth}
-                    min={Math.min(...widths)}
-                    max={Math.max(...widths)}
+                    value={selectedLength}
+                    min={Math.min(...lengths)}
+                    max={Math.max(...lengths)}
                     step="0.1"
-                    onChange={handleWidthChange}
+                    onChange={handleLengthChange}
                   />
                   <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus
