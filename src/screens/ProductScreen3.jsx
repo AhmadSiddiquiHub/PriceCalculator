@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 // Length and Width arrays
-const widths = [
+const lengths = [
   197, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000,
   2100, 2200, 2300, 2400, 2500, 2600, 2700,
 ];
-const lengths = [
+const widths = [
   800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900,
 ];
 
@@ -206,9 +206,9 @@ const ProductScreen3 = () => {
     if (
       lengthIndex !== -1 &&
       widthIndex !== -1 &&
-      prices[widthIndex][lengthIndex] !== undefined
+      prices[lengthIndex][widthIndex] !== undefined
     ) {
-      let basePrice = prices[widthIndex][lengthIndex];
+      let basePrice = prices[lengthIndex][widthIndex];
 
       // Adjust base price based on color
       if (colors.indexOf(color) > 1) {
@@ -295,11 +295,11 @@ const ProductScreen3 = () => {
                   <input
                     type="number"
                     className="field__input"
-                    value={selectedWidth}
-                    min={Math.min(...widths)}
-                    max={Math.max(...widths)}
+                    value={selectedLength}
+                    min={Math.min(...lengths)}
+                    max={Math.max(...lengths)}
                     step="0.1"
-                    onChange={handleWidthChange}
+                    onChange={handleLengthChange}
                   />
                   <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
@@ -315,11 +315,11 @@ const ProductScreen3 = () => {
                   <input
                     type="number"
                     className="field__input"
-                    value={selectedLength}
-                    min={Math.min(...lengths)}
-                    max={Math.max(...lengths)}
+                    value={selectedWidth}
+                    min={Math.min(...widths)}
+                    max={Math.max(...widths)}
                     step="0.1"
-                    onChange={handleLengthChange}
+                    onChange={handleWidthChange}
                   />
                   <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus
