@@ -195,10 +195,9 @@ const ProductScreen6 = () => {
     if (
       lengthIndex !== -1 &&
       widthIndex !== -1 &&
-      prices[lengthIndex] &&
-      prices[lengthIndex][widthIndex] !== undefined
+      prices[widthIndex][lengthIndex] !== undefined
     ) {
-      let basePrice = prices[lengthIndex][widthIndex];
+      let basePrice = prices[widthIndex][lengthIndex];
 
       // Adjust base price based on color
       if (colors.indexOf(color) > 1) {

@@ -311,8 +311,12 @@ const ProductScreen5 = () => {
     const lengthIndex = findIndexInRange(length, lengths);
     const widthIndex = findIndexInRange(width, widths);
 
-    if (lengthIndex !== -1 && widthIndex !== -1) {
-      let basePrice = prices[lengthIndex][widthIndex];
+    if (
+      lengthIndex !== -1 &&
+      widthIndex !== -1 &&
+      prices[widthIndex][lengthIndex] !== undefined
+    ) {
+      let basePrice = prices[widthIndex][lengthIndex];
 
       // Adjust base price based on color
       if (colors.indexOf(color) > 1) {
