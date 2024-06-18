@@ -223,17 +223,17 @@ const ProductScreen3 = () => {
       if (motor) {
         if (motor.name === "Moteur Filaire (commande via interrupteur)") {
           if (area > 0 && area <= 29) basePrice += 119;
-          else if (area >= 30 && area <= 49) basePrice += 139;
-          else if (area >= 50 && area <= 70) basePrice += 159;
-          else if (area <= 80 && area <= 99) basePrice += 284;
-          else if (area <= 100 && area <= 119) basePrice += 318;
+          else if (area > 29 && area <= 49) basePrice += 139;
+          else if (area > 49 && area <= 79) basePrice += 159;
+          else if (area > 79 && area <= 99) basePrice += 284;
+          else if (area > 99 && area <= 119) basePrice += 318;
           else basePrice += 360;
         } else if (motor.name === "Moteur Télécommandé") {
           if (area > 0 && area <= 29) basePrice += 159;
-          else if (area >= 30 && area <= 49) basePrice += 179;
-          else if (area >= 50 && area <= 70) basePrice += 199;
-          else if (area <= 80 && area <= 99) basePrice += 285;
-          else if (area <= 100 && area <= 119) basePrice += 300;
+          else if (area > 29 && area <= 49) basePrice += 179;
+          else if (area > 49 && area <= 79) basePrice += 199;
+          else if (area > 79 && area <= 99) basePrice += 285;
+          else if (area > 99 && area <= 119) basePrice += 300;
           else basePrice += 315;
         }
       }
