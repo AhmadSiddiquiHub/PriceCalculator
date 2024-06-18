@@ -160,8 +160,8 @@ const colorMap = {
   Blanc: "#ffffff",
   "Maron Jamaique": "#5b5454",
   "Blanc Crème": "#dfd9c3",
-  "Beige Clair": "#dfcdac",
-  Naturel: "#c0beba",
+  "Gris Anthracite": "#363b3b",
+  "Gris Alu": "#c0beba",
   "Gris Clair": "#a6a89b",
 };
 
@@ -170,8 +170,8 @@ const colors = [
   "Blanc",
   "Maron Jamaique",
   "Blanc Crème",
-  "Beige Clair",
-  "Naturel",
+  "Gris Anthracite",
+  "Gris Alu",
   "Gris Clair",
 ];
 

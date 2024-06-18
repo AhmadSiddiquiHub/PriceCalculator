@@ -144,11 +144,11 @@ const prices = [
 const colorMap = {
   Blanc: "#ffffff",
   "Maron Jamaique": "#5b5454",
-  Black: "#000000",
+  "Gris Anthracite": "#363b3b",
 };
 
 // Colors array
-const colors = ["Blanc", "Maron Jamaique", "Black"];
+const colors = ["Blanc", "Maron Jamaique", "Gris Anthracite"];
 
 // Motors array
 const motors = [
