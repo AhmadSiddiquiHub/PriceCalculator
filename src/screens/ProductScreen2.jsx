@@ -405,11 +405,11 @@ const ProductScreen2 = () => {
                   <input
                     type="number"
                     className="field__input"
-                    value={selectedLength}
-                    min={Math.min(...lengths)}
-                    max={Math.max(...lengths)}
+                    value={selectedWidth}
+                    min={Math.min(...widths)}
+                    max={Math.max(...widths)}
                     step="0.1"
-                    onChange={handleLengthChange}
+                    onChange={handleWidthChange}
                   />
                   <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
@@ -425,11 +425,11 @@ const ProductScreen2 = () => {
                   <input
                     type="number"
                     className="field__input"
-                    value={selectedWidth}
-                    min={Math.min(...widths)}
-                    max={Math.max(...widths)}
+                    value={selectedLength}
+                    min={Math.min(...lengths)}
+                    max={Math.max(...lengths)}
                     step="0.1"
-                    onChange={handleWidthChange}
+                    onChange={handleLengthChange}
                   />
                   <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus

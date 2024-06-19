@@ -398,26 +398,6 @@ const ProductScreen5 = () => {
                   <label className="labels">
                     <span className="labels-head">Largeur</span>
                     <br />
-                    Min (1200m) & Max (3600m)
-                  </label>
-                  <input
-                    type="number"
-                    className="field__input"
-                    value={selectedLength}
-                    min={Math.min(...lengths)}
-                    max={Math.max(...lengths)}
-                    step="0.1"
-                    onChange={handleLengthChange}
-                  />
-                  <p>
-                    Mesurez la largeur entre murs en 3 points et gardez la plus
-                    petite
-                  </p>
-                </div>
-                <div className="col-6 sel-inp">
-                  <label className="labels">
-                    <span className="labels-head">Hauteur</span>
-                    <br />
                     Min (1800m) & Max (5000m)
                   </label>
                   <input
@@ -428,6 +408,26 @@ const ProductScreen5 = () => {
                     max={Math.max(...widths)}
                     step="0.1"
                     onChange={handleWidthChange}
+                  />
+                  <p>
+                    Mesurez la largeur entre murs en 3 points et gardez la plus
+                    petite
+                  </p>
+                </div>
+                <div className="col-6 sel-inp">
+                  <label className="labels">
+                    <span className="labels-head">Hauteur</span>
+                    <br />
+                    Min (1200m) & Max (3600m)
+                  </label>
+                  <input
+                    type="number"
+                    className="field__input"
+                    value={selectedLength}
+                    min={Math.min(...lengths)}
+                    max={Math.max(...lengths)}
+                    step="0.1"
+                    onChange={handleLengthChange}
                   />
                   <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus
