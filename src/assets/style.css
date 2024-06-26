@@ -440,7 +440,6 @@ hr.custom {
 /* Ensure the overall container allows scrolling */
 .checkout-container {
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   max-width: 1200px;
@@ -448,17 +447,17 @@ hr.custom {
 }
 
 .payment-section {
-  padding: 35px; /* Adjust as needed for scrollbar */
+  padding: 35px;
   background: white;
 }
 
 .cart-container {
-  position: -webkit-sticky; /* For Safari */
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   padding-left: 15px;
   height: 100vh;
-  overflow-y: auto; /* Ensure the cart itself can scroll if necessary */
+  overflow-y: auto;
 }
 
 .payment-container {
@@ -485,15 +484,27 @@ p {
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
 
-.card-option:checked > .card-cont {
-  background: #f0f5ff;
+.payment-option input {
+  cursor: pointer;
+}
+
+.card-cont.selected {
+  background-color: #e9f5ff;
+  border-color: #007bff;
+  border-radius: 10px;
 }
 
 .card-option {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.klarna-option {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .payment-option input[type="radio"] {
@@ -505,6 +516,8 @@ p {
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  font-weight: bold;
+  font-size: 14px;
 }
 .card-imgs img {
   margin-left: 5px;
@@ -522,6 +535,24 @@ p {
 
   input {
     font-weight: bolder;
+  }
+
+  p {
+    font-size: 14px;
+    text-align: center;
+    font-weight: bolder;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+      max-width: 150px;
+      max-height: 90px;
+    }
   }
 }
 
@@ -589,6 +620,7 @@ button[type="submit"]:hover {
 
 /* Cart Section */
 .right-sec {
+  position: relative;
   background: #f5f5f5;
   padding: 35px;
 }
@@ -694,7 +726,7 @@ button[type="submit"]:hover {
   margin-left: 5px;
   font-size: 16px;
   right: 20px;
-  top: 32px;
+  top: 28px;
 }
 
 .background-dim {

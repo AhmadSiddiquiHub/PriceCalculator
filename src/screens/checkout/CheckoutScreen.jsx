@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { RiQuestionLine } from "react-icons/ri";
-import {
-  GrShop,
-  GrPaypal,
-  GrGooglePay,
-  GrClose,
-  GrDocument,
-  GrLock,
-} from "react-icons/gr";
-import { BsFillCaretDownFill } from "react-icons/bs";
-import { RiVisaFill, RiMastercardFill } from "react-icons/ri";
-import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { GrLock } from "react-icons/gr";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import CountrySelect from "../../components/CountrySelect";
 import { RiSmartphoneLine } from "react-icons/ri";
@@ -22,7 +12,6 @@ const PaymentAccordion = () => {
   const [total, setTotal] = useState(59.0);
   const [showShippingPolicy, setShowShippingPolicy] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
-  const [showBillingAddress, setShowBillingAddress] = useState(false);
   const [selectedShippingOption, setSelectedShippingOption] =
     useState("standard");
   const [postalCode, setPostalCode] = useState(null);
@@ -37,8 +26,6 @@ const PaymentAccordion = () => {
   };
 
   const handleApplyDiscount = () => {
-    // Logic to apply discount (if any)
-    // For now, let's just log the discount code
     console.log("Discount code applied:", discountCode);
   };
 
@@ -230,7 +217,11 @@ const PaymentAccordion = () => {
                 All transactions are secure and encrypted.
               </div>
               <div className="payment-container">
-                <div className="card-cont">
+                <div
+                  className={`card-cont ${
+                    selectedOption === "card" ? "selected" : ""
+                  }`}
+                >
                   <div className="payment-option card-option">
                     <input
                       type="radio"
@@ -302,8 +293,8 @@ const PaymentAccordion = () => {
                             <input
                               className="inp-outline"
                               type="text"
-                              id="cvv"
-                              name="cvv"
+                              id="nameOnCard"
+                              name="nameOnCard"
                               placeholder="Name on card"
                             />
                           </div>
@@ -313,23 +304,29 @@ const PaymentAccordion = () => {
                   )}
                 </div>
 
-                <div className="payment-option">
-                  <input
-                    type="radio"
-                    id="paypal"
-                    name="payment"
-                    value="paypal"
-                    checked={selectedOption === "paypal"}
-                    onChange={() => handleOptionChange("paypal")}
-                  />
-                  <label htmlFor="paypal" className="payment-label">
-                    <h3 className="section-title">PayPal</h3>
-                    <img
-                      src="/images/paypal.webp"
-                      alt="PayPal Logo"
-                      className="payment-logo"
+                <div
+                  className={`card-cont ${
+                    selectedOption === "paypal" ? "selected" : ""
+                  }`}
+                >
+                  <div className="payment-option">
+                    <input
+                      type="radio"
+                      id="paypal"
+                      name="payment"
+                      value="paypal"
+                      checked={selectedOption === "paypal"}
+                      onChange={() => handleOptionChange("paypal")}
                     />
-                  </label>
+                    <label htmlFor="paypal" className="payment-label">
+                      <span>PayPal</span>
+                      <img
+                        src="/images/paypal.webp"
+                        alt="PayPal Logo"
+                        className="payment-logo"
+                      />
+                    </label>
+                  </div>
                   {selectedOption === "paypal" && (
                     <div className="payment-details">
                       <p>
@@ -340,55 +337,75 @@ const PaymentAccordion = () => {
                   )}
                 </div>
 
-                <div className="payment-option">
-                  <input
-                    type="radio"
-                    id="clearpay"
-                    name="payment"
-                    value="clearpay"
-                    checked={selectedOption === "clearpay"}
-                    onChange={() => handleOptionChange("clearpay")}
-                  />
-                  <label htmlFor="clearpay" className="payment-label">
-                    <span>Clearpay</span>
-                    <img
-                      src="/images/clear-pay.png"
-                      alt="Clearpay Logo"
-                      className="payment-logo"
+                <div
+                  className={`card-cont ${
+                    selectedOption === "clearpay" ? "selected" : ""
+                  }`}
+                >
+                  <div className="payment-option">
+                    <input
+                      type="radio"
+                      id="clearpay"
+                      name="payment"
+                      value="clearpay"
+                      checked={selectedOption === "clearpay"}
+                      onChange={() => handleOptionChange("clearpay")}
                     />
-                  </label>
+                    <label htmlFor="clearpay" className="payment-label">
+                      <span>Clearpay</span>
+                      <img
+                        src="/images/clear-pay.png"
+                        alt="Clearpay Logo"
+                        className="payment-logo"
+                      />
+                    </label>
+                  </div>
                   {selectedOption === "clearpay" && (
                     <div className="payment-details">
+                      <div>
+                        <img src="/images/card.png" alt="card-image" />
+                      </div>
                       <p>
-                        Clearpay allows you to split your purchase into four
-                        equal payments.
+                        After clicking “Pay now”, you will be redirected to
+                        <br />
+                        Clearpay to complete your purchase securely.
                       </p>
                     </div>
                   )}
                 </div>
 
-                <div className="payment-option">
-                  <input
-                    type="radio"
-                    id="klarna"
-                    name="payment"
-                    value="klarna"
-                    checked={selectedOption === "klarna"}
-                    onChange={() => handleOptionChange("klarna")}
-                  />
-                  <label htmlFor="klarna" className="payment-label">
-                    <span>Klarna - Flexible payments</span>
-                    <img
-                      src="/images/klarna.png"
-                      alt="Klarna Logo"
-                      className="payment-logo"
+                <div
+                  className={`card-cont ${
+                    selectedOption === "klarna" ? "selected" : ""
+                  }`}
+                >
+                  <div className="payment-option">
+                    <input
+                      type="radio"
+                      id="klarna"
+                      name="payment"
+                      value="klarna"
+                      checked={selectedOption === "klarna"}
+                      onChange={() => handleOptionChange("klarna")}
                     />
-                  </label>
+                    <label htmlFor="klarna" className="payment-label">
+                      <span>Klarna - Flexible payments</span>
+                      <img
+                        src="/images/klarna.png"
+                        alt="Klarna Logo"
+                        className="payment-logo"
+                      />
+                    </label>
+                  </div>
                   {selectedOption === "klarna" && (
-                    <div className="payment-details">
+                    <div className="payment-details klarna-option">
+                      <div>
+                        <img src="/images/card.png" alt="card-image" />
+                      </div>
                       <p>
-                        Klarna offers flexible payment options for your
-                        purchase.
+                        After clicking “Pay now”, you will be redirected to
+                        Klarna <br /> - Flexible payments to complete your
+                        purchase securely.
                       </p>
                     </div>
                   )}
