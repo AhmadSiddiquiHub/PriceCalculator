@@ -9,22 +9,51 @@ import ProductScreen6 from "./screens/products/ProductScreen6";
 import ProductScreen7 from "./screens/products/ProductScreen7";
 import ProductScreen8 from "./screens/products/ProductScreen8";
 import CheckoutScreen from "./screens/checkout/CheckoutScreen";
+import cartStore from "./store";
 
 function App() {
+  const handleAddToCart = (product) => {
+    cartStore.addItem(product);
+  };
   return (
     <Router>
       <main>
-        {/* <Header /> */}
+        <Header />
         <Routes>
-          <Route exact path="/" element={<ProductScreen1 />} />
-          <Route exact path="/2" element={<ProductScreen2 />} />
-          <Route exact path="/3" element={<ProductScreen3 />} />
-          <Route exact path="/4" element={<ProductScreen4 />} />
-          <Route exact path="/5" element={<ProductScreen5 />} />
-          <Route exact path="/6" element={<ProductScreen6 />} />
-          <Route exact path="/7" element={<ProductScreen7 />} />
-          <Route exact path="/8" element={<ProductScreen8 />} />
-          <Route exact path="/checkout" element={<CheckoutScreen />} />
+          <Route
+            exact
+            path="/"
+            element={<ProductScreen1 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/2"
+            element={<ProductScreen2 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/3"
+            element={<ProductScreen3 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/4"
+            element={<ProductScreen4 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/5"
+            element={<ProductScreen5 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/6"
+            element={<ProductScreen6 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/7"
+            element={<ProductScreen7 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/8"
+            element={<ProductScreen8 onAddToCart={handleAddToCart} s />}
+          />
+          <Route path="/checkout" element={<CheckoutScreen />} />
         </Routes>
       </main>
     </Router>

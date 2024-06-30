@@ -5,16 +5,19 @@ import { GrLock } from "react-icons/gr";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import CountrySelect from "../../components/CountrySelect";
 import { RiSmartphoneLine } from "react-icons/ri";
+import { useSnapshot } from "valtio";
+import cartStore from "../../store";
+import { BsCartXFill } from "react-icons/bs";
+import { MdDelete } from "react-icons/md";
 
-const PaymentAccordion = () => {
+const CheckoutPage = () => {
   const [selectedOption, setSelectedOption] = useState("card");
   const [discountCode, setDiscountCode] = useState("");
-  const [total, setTotal] = useState(59.0);
   const [showShippingPolicy, setShowShippingPolicy] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
   const [selectedShippingOption, setSelectedShippingOption] =
     useState("standard");
-  const [postalCode, setPostalCode] = useState(null);
+  const [postalCode, setPostalCode] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -42,6 +45,13 @@ const PaymentAccordion = () => {
   const handleShippingOptionChange = (event) => {
     setSelectedShippingOption(event.target.value);
   };
+
+  const cart = useSnapshot(cartStore);
+  console.log("Cart on Checkout: ", cart.items);
+
+  const totalPrice = cart.items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
 
   return (
     <div className="checkout-page">
@@ -458,105 +468,152 @@ const PaymentAccordion = () => {
                 </>
               )}
             </div>
-            <button className="pay-button">
+            <button className="pay-button" disabled={cart.items.length === 0}>
               {selectedOption === "paypal" ? "PayPal" : "Pay Now"}
             </button>
           </div>
 
           {/* Right Side */}
           <div className="col-md-5 right-sec">
-            <div className="testing">
-              <div className="cart-item">
-                <div className="item-image">
-                  <img
-                    src="/images/prod-cart-img-2.webp"
-                    alt="Electric Toothbrush"
-                  />
-                </div>
-                <div className="item-details">
-                  <h3>Electric Toothbrush</h3>
-                  <p>Black Electric Toothbrush</p>
-                </div>
-                <div className="item-price">€59.00</div>
+            {cart.items.length === 0 ? (
+              <div className="empty-cart">
+                <p style={{ fontSize: "30px", fontWeight: "bolder" }}>
+                  Your cart is empty!
+                </p>
+                <i style={{ fontSize: "80px" }}>
+                  <BsCartXFill />
+                </i>
               </div>
-              <div className="discount-code">
-                <input
-                  type="text"
-                  placeholder="Discount code or gift card"
-                  value={discountCode}
-                  onChange={(e) => setDiscountCode(e.target.value)}
-                />
-                <button onClick={handleApplyDiscount}>Apply</button>
-              </div>
-              <div className="cart-summary">
-                <div className="subtotal">
-                  <span>Subtotal</span>
-                  <span>€59.00</span>
-                </div>
-                <div className="shipping">
-                  <span>
-                    Shipping
-                    <span className="info-icon" onClick={toggleShippingPolicy}>
-                      <RiQuestionLine />
-                    </span>
-                  </span>
-
-                  <span>Enter shipping address</span>
-                </div>
-                <div className="cart-total">
-                  <span>Total</span>
-                  <span>
-                    <span className="cart-curr">EUR</span> €{total.toFixed(2)}
-                  </span>
-                </div>
-
-                {showShippingPolicy && (
-                  <div
-                    className="shipping-policy-popup"
-                    onClick={handleClosePopup}
-                  >
-                    <div className="popup-content animate-popup">
-                      <div className="popup-head">
-                        <div>
-                          <h3>Shipping Policy</h3>
-                          <button onClick={toggleShippingPolicy}>
-                            <MdOutlineCancel />
-                          </button>
-                        </div>
-                        <p>
-                          All orders placed will be dispatched from our
-                          warehouse within 3-10 business days. Please note all
-                          shipping timeframe are calculated from date of
-                          dispatch.
-                          <br />
-                          All dispatch times and shipping times are estimated in
-                          business days (Monday - Friday) as outlined here.
-                          Estimated delivery timeframes are based on Metro areas
-                          only. Shipping times exclude customs clearance delays
-                          and any other delays caused in circumstances that are
-                          outside our control.
-                          <br />
-                          We cannot make changes to your shipping addresses or
-                          redirect your parcel once your order has been
-                          confirmed.
-                          <br />
-                          Please note that it might not be possible for us to
-                          deliver each service to some locations, and we may not
-                          be able to offer equivalent delivery options to your
-                          location. If we are unable to deliver to your
-                          location, we will inform you, or alternatively arrange
-                          with you for cancellation of the order or delivery to
-                          an alternative delivery address.
-                          <br />
-                          Any further questions please contact
-                          help@hismileteeth.com
-                        </p>
+            ) : (
+              <>
+                {cart.items.map((item) => (
+                  <div key={item.id}>
+                    <div className="cart-item">
+                      <div className="item-image">
+                        <img src={item.image} alt={item?.name} />
                       </div>
+                      <div className="item-details">
+                        <h3>{item.name}</h3>
+                        <div className="cart-detail">
+                          <p>
+                            {item.dimensions && (
+                              <>
+                                Dimensions: {item.dimensions} <br />
+                              </>
+                            )}
+                            {item.color && (
+                              <>
+                                Color: {item.color} <br />
+                              </>
+                            )}
+                            {item.motor?.name && (
+                              <>
+                                Motor: {item.motor.name} <br />
+                              </>
+                            )}
+                            {item.interrupteur && (
+                              <>
+                                Interrupteur: {item.interrupteur} <br />
+                              </>
+                            )}
+                            {item.cable && <>Cable: {item.cable}</>}
+                          </p>
+                          <span className="cart-action">
+                            <p>Quantity: {item.quantity}</p>
+                            <i onClick={() => cartStore.removeItem(item.id)}>
+                              <MdDelete />
+                            </i>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="item-price">€{item.price}</div>
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
+                ))}
+                <hr />
+                <div className="discount-code">
+                  <input
+                    type="text"
+                    placeholder="Discount code or gift card"
+                    value={discountCode}
+                    onChange={(e) => setDiscountCode(e.target.value)}
+                  />
+                  <button onClick={handleApplyDiscount}>Apply</button>
+                </div>
+                <div className="cart-summary">
+                  <div className="subtotal">
+                    <span>Subtotal</span>
+                    <span>€{totalPrice}</span>
+                  </div>
+                  <div className="shipping">
+                    <span>
+                      Shipping
+                      <span
+                        className="info-icon"
+                        onClick={toggleShippingPolicy}
+                      >
+                        <RiQuestionLine />
+                      </span>
+                    </span>
+
+                    <span>FREE</span>
+                  </div>
+                  <div className="cart-total">
+                    <span>Total</span>
+                    <span>
+                      <span className="cart-curr">EUR</span> €
+                      {totalPrice.toFixed(2)}
+                    </span>
+                  </div>
+
+                  {showShippingPolicy && (
+                    <div
+                      className="shipping-policy-popup"
+                      onClick={handleClosePopup}
+                    >
+                      <div className="popup-content animate-popup">
+                        <div className="popup-head">
+                          <div>
+                            <h3>Shipping Policy</h3>
+                            <button onClick={toggleShippingPolicy}>
+                              <MdOutlineCancel />
+                            </button>
+                          </div>
+                          <p>
+                            All orders placed will be dispatched from our
+                            warehouse within 3-10 business days. Please note all
+                            shipping timeframe are calculated from date of
+                            dispatch.
+                            <br />
+                            All dispatch times and shipping times are estimated
+                            in business days (Monday - Friday) as outlined here.
+                            Estimated delivery timeframes are based on Metro
+                            areas only. Shipping times exclude customs clearance
+                            delays and any other delays caused in circumstances
+                            that are outside our control.
+                            <br />
+                            We cannot make changes to your shipping addresses or
+                            redirect your parcel once your order has been
+                            confirmed.
+                            <br />
+                            Please note that it might not be possible for us to
+                            deliver each service to some locations, and we may
+                            not be able to offer equivalent delivery options to
+                            your location. If we are unable to deliver to your
+                            location, we will inform you, or alternatively
+                            arrange with you for cancellation of the order or
+                            delivery to an alternative delivery address.
+                            <br />
+                            Any further questions please contact
+                            help@hismileteeth.com
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -564,4 +621,4 @@ const PaymentAccordion = () => {
   );
 };
 
-export default PaymentAccordion;
+export default CheckoutPage;

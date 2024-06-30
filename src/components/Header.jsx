@@ -1,8 +1,11 @@
 // React component
 import React from "react";
 import { Link } from "react-router-dom";
+import cartStore from "../store";
+import { useSnapshot } from "valtio";
 
 const Header = () => {
+  const cart = useSnapshot(cartStore);
   return (
     <header className="header-main">
       <div className="header">
@@ -22,8 +25,10 @@ const Header = () => {
           </button>
         </div>
         <div className="cart-icon">
-          <i className="fa fa-2x fa-shopping-bag" aria-hidden="true"></i>
-          <span>0</span>
+          <Link to="/checkout">
+            <i className="fa fa-2x fa-shopping-bag" aria-hidden="true"></i>
+            <span>{cart.items.length}</span>
+          </Link>
         </div>
       </div>
     </header>

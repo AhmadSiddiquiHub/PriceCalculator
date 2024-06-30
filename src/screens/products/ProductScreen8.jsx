@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Length and Width arrays
 const lengths = [
@@ -175,7 +176,7 @@ const colors = [
   "Gris Clair",
 ];
 
-const ProductScreen3 = () => {
+const ProductScreen3 = ({ onAddToCart }) => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
   const [selectedWidth, setSelectedWidth] = useState(widths[0]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
@@ -246,6 +247,20 @@ const ProductScreen3 = () => {
   useEffect(() => {
     updatePrice(selectedLength, selectedWidth, selectedColor);
   }, [selectedLength, selectedWidth, selectedColor]);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: 8,
+      name: "VOLET MINI INDUS ALU 77",
+      category: "VOLET",
+      dimensions: `${selectedLength} X ${selectedWidth}`,
+      color: selectedColor,
+      image: "/images/prod-img.png",
+      price: price,
+      quantity: 1,
+    };
+    onAddToCart(product);
+  };
 
   return (
     <>
@@ -346,7 +361,11 @@ const ProductScreen3 = () => {
             </div>
 
             <div className="cart-button">
-              <button className="cart-btn">Ajouter au panier</button>
+              <Link to="/checkout">
+                <button className="cart-btn" onClick={handleAddToCart}>
+                  Ajouter au panier
+                </button>
+              </Link>
             </div>
           </div>
         </div>

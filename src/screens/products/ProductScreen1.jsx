@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Length and Width arrays
 const lengths = [
@@ -174,7 +175,7 @@ const interrupteurs_a = [
     id: 1,
     name: "Interrupteur Apparent",
     imagePath: "/images/inter-1.png",
-    price: 15, // Add the price property here
+    price: 15,
   },
   {
     id: 2,
@@ -223,30 +224,17 @@ const cableTypes = [
   { name: "Bas arrière gauche", imagePath: "/images/edge-6.png" },
 ];
 
-const ProductScreen1 = () => {
+const ProductScreen1 = ({ onAddToCart }) => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
   const [selectedWidth, setSelectedWidth] = useState(widths[0]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedMotor, setSelectedMotor] = useState(motors[0]);
   const [selectedInterrupteur, setSelectedInterrupteur] = useState(null);
+  const [selectedInter, setSelectedInter] = useState(null);
   const [selectedCableType, setSelectedCableType] = useState(
     cableTypes[0].name
   );
   const [price, setPrice] = useState(null);
-
-  // const handleLengthChange = (e) => {
-  //   const newLength = parseFloat(e.target.value);
-  //   if (!isNaN(newLength)) {
-  //     setSelectedLength(newLength);
-  //     updatePrice(
-  //       newLength,
-  //       selectedWidth,
-  //       selectedColor,
-  //       selectedMotor,
-  //       selectedInterrupteur
-  //     );
-  //   }
-  // };
 
   const handleLengthChange = (e) => {
     const value = e.target.value;
@@ -281,20 +269,6 @@ const ProductScreen1 = () => {
       }
     }
   };
-
-  // const handleWidthChange = (e) => {
-  //   const newWidth = parseFloat(e.target.value);
-  //   if (!isNaN(newWidth)) {
-  //     setSelectedWidth(newWidth);
-  //     updatePrice(
-  //       selectedLength,
-  //       newWidth,
-  //       selectedColor,
-  //       selectedMotor,
-  //       selectedInterrupteur
-  //     );
-  //   }
-  // };
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
@@ -365,14 +339,6 @@ const ProductScreen1 = () => {
       const widthInMeters = width / 1000;
       const area = lengthInMeters * widthInMeters * 3;
 
-      // Add motor price
-      // if (motor) {
-      //   if (motor.name === "Moteur Filaire (commande via interrupteur)") {
-      //     basePrice += area < 15 ? 10 : 21;
-      //   } else if (motor.name === "Moteur Télécommandé") {
-      //     basePrice += area < 15 ? 21 : 81;
-      //   }
-      // }
       if (motor) {
         if (motor.name === "Moteur Filaire (commande via interrupteur)") {
           if (area > 0 && area <= 15) basePrice += 119;
@@ -395,6 +361,7 @@ const ProductScreen1 = () => {
       if (interrupteur) {
         const inter = interrupteurs[motor.id - 1];
         const interPrice = inter[interrupteur - 1].price;
+        setSelectedInter(inter[interrupteur - 1].name);
         basePrice += interPrice;
       }
 
@@ -419,6 +386,25 @@ const ProductScreen1 = () => {
     selectedMotor,
     selectedInterrupteur,
   ]);
+
+  console.log("Select Inter: ", selectedInterrupteur);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: 1,
+      name: "VOLET MINI CAISSON ALU 42",
+      category: "VOLET",
+      dimensions: `${selectedLength} X ${selectedWidth}`,
+      color: selectedColor,
+      motor: selectedMotor,
+      interrupteur: selectedInter,
+      cable: selectedCableType,
+      image: "/images/prod-img.png",
+      price: price,
+      quantity: 1,
+    };
+    onAddToCart(product);
+  };
 
   return (
     <>
@@ -624,7 +610,11 @@ const ProductScreen1 = () => {
             </div>
 
             <div className="cart-button">
-              <button className="cart-btn">Ajouter au panier</button>
+              <Link to="/checkout">
+                <button className="cart-btn" onClick={handleAddToCart}>
+                  Ajouter au panier
+                </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Length and Width arrays
 const lengths = [
@@ -239,12 +240,13 @@ const cableTypes = [
   { name: "Bas arrière gauche", imagePath: "/images/edge-6.png" },
 ];
 
-const ProductScreen4 = () => {
+const ProductScreen4 = ({ onAddToCart }) => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
   const [selectedWidth, setSelectedWidth] = useState(widths[0]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedMotor, setSelectedMotor] = useState(motors[0]);
   const [selectedInterrupteur, setSelectedInterrupteur] = useState(null);
+  const [selectedInter, setSelectedInter] = useState(null);
   const [selectedCableType, setSelectedCableType] = useState(
     cableTypes[0].name
   );
@@ -376,6 +378,7 @@ const ProductScreen4 = () => {
       if (interrupteur) {
         const inter = interrupteurs[motor.id - 1];
         const interPrice = inter[interrupteur - 1].price;
+        setSelectedInter(inter[interrupteur - 1].name);
         basePrice += interPrice;
       }
 
@@ -400,6 +403,23 @@ const ProductScreen4 = () => {
     selectedMotor,
     selectedInterrupteur,
   ]);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: 4,
+      name: "VOLET MINI INDUS ALU 55",
+      category: "VOLET",
+      dimensions: `${selectedLength} X ${selectedWidth}`,
+      color: selectedColor,
+      motor: selectedMotor,
+      interrupteur: selectedInter,
+      cable: selectedCableType,
+      image: "/images/prod-img.png",
+      price: price,
+      quantity: 1,
+    };
+    onAddToCart(product);
+  };
 
   return (
     <>
@@ -605,7 +625,11 @@ const ProductScreen4 = () => {
             </div>
 
             <div className="cart-button">
-              <button className="cart-btn">Ajouter au panier</button>
+              <Link to="/checkout">
+                <button className="cart-btn" onClick={handleAddToCart}>
+                  Ajouter au panier
+                </button>
+              </Link>
             </div>
           </div>
         </div>

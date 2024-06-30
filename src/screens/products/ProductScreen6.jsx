@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Length and Width arrays
 const lengths = [
@@ -142,7 +143,7 @@ const colors = [
   "Noir",
 ];
 
-const ProductScreen6 = () => {
+const ProductScreen6 = ({ onAddToCart }) => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
   const [selectedWidth, setSelectedWidth] = useState(widths[0]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
@@ -213,6 +214,20 @@ const ProductScreen6 = () => {
   useEffect(() => {
     updatePrice(selectedLength, selectedWidth, selectedColor);
   }, [selectedLength, selectedWidth, selectedColor]);
+
+  const handleAddToCart = () => {
+    const product = {
+      id: 6,
+      name: "TABLIER ALU 42",
+      category: "VOLET",
+      dimensions: `${selectedLength} X ${selectedWidth}`,
+      color: selectedColor,
+      image: "/images/prod-img.png",
+      price: price,
+      quantity: 1,
+    };
+    onAddToCart(product);
+  };
 
   return (
     <>
@@ -313,7 +328,11 @@ const ProductScreen6 = () => {
             </div>
 
             <div className="cart-button">
-              <button className="cart-btn">Ajouter au panier</button>
+              <Link to="/checkout">
+                <button className="cart-btn" onClick={handleAddToCart}>
+                  Ajouter au panier
+                </button>
+              </Link>
             </div>
           </div>
         </div>
