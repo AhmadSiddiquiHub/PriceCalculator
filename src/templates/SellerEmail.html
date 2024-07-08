@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Order Notification</title>
+  </head>
+  <body>
+    <h1>New Order Received</h1>
+    <p>A new order has been placed by {{buyerName}} ({{buyerEmail}}).</p>
+    <h2>Order Details</h2>
+    <ul>
+      {{cartItems}}
+    </ul>
+    <p>Total Price: €{{totalPrice}}</p>
+    <p>Transaction ID: {{transactionId}}</p>
+    <p>Best regards,<br />Your Company Name</p>
+  </body>
+</html>

@@ -9,6 +9,7 @@ import { useSnapshot } from "valtio";
 import cartStore from "../../store";
 import { BsCartXFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import PayPalButton from "../../components/PaypalButton";
 
 const CheckoutPage = () => {
   const [selectedOption, setSelectedOption] = useState("card");
@@ -17,8 +18,18 @@ const CheckoutPage = () => {
   const [showAddress, setShowAddress] = useState(false);
   const [selectedShippingOption, setSelectedShippingOption] =
     useState("standard");
-  const [postalCode, setPostalCode] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    postalCode: "",
+    city: "",
+    phone: "",
+    country: null,
+  });
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -46,8 +57,47 @@ const CheckoutPage = () => {
     setSelectedShippingOption(event.target.value);
   };
 
+  const handleCountryChange = (country) => {
+    setFormData((prevData) => ({ ...prevData, country }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const isFormValid = () => {
+    // Ensure all required fields are filled
+    const requiredFields = [
+      "email",
+      "firstName",
+      "lastName",
+      "address",
+      "postalCode",
+      "city",
+      "phone",
+    ];
+    for (const field of requiredFields) {
+      if (!formData[field] || formData[field].trim() === "") {
+        return false;
+      }
+    }
+
+    // Validate email format (simple regex)
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.email)) {
+      return false;
+    }
+
+    // Validate phone number length (assuming it should be at least 10 digits)
+    if (formData.phone.length < 10) {
+      return false;
+    }
+
+    return true;
+  };
+
   const cart = useSnapshot(cartStore);
-  console.log("Cart on Checkout: ", cart.items);
 
   const totalPrice = cart.items.reduce((total, item) => {
     return total + item.price * item.quantity;
@@ -79,85 +129,111 @@ const CheckoutPage = () => {
                 </div>
                 {/* <button className="log-in-button">Log in</button> */}
               </div>
-              <div className="checkout-section">
-                <h3 className="section-head">Contact</h3>
-                <input
-                  className="inp-outline"
-                  type="text"
-                  placeholder="Email"
-                />
-                <div className="checkbox-container">
+              <form>
+                <div className="checkout-section">
+                  <h3 className="section-head">Contact</h3>
                   <input
-                    type="checkbox"
-                    id="customCheckbox"
-                    className="custom-checkbox"
+                    className="inp-outline"
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
                   />
+                  <div className="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="customCheckbox"
+                      className="custom-checkbox"
+                    />
 
-                  <span>Email me with news and offers</span>
-                </div>
-              </div>
-              <div className="checkout-section">
-                <h3 className="section-head">Delivery</h3>
-                {/* Country Field */}
-                <CountrySelect />
-                <div className="row delivery-form">
-                  <div className="col-md-6">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="First name"
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="Last name"
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="Address"
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="Apartment, suite, etc. (optional)"
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="Postal code"
-                      value={postalCode}
-                      onChange={(e) => setPostalCode(e.target.value)}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="City"
-                    />
-                  </div>
-                  <div className="col-md-12 inp-symbol">
-                    <input
-                      className="inp-outline"
-                      type="text"
-                      placeholder="Phone"
-                    />
-                    <i>
-                      <AiOutlineInfoCircle className="info-icon-phone" />
-                    </i>
+                    <span>Email me with news and offers</span>
                   </div>
                 </div>
+                <div className="checkout-section">
+                  <h3 className="section-head">Delivery</h3>
+                  <CountrySelect
+                    value={formData.country}
+                    onChange={handleCountryChange}
+                  />
+                  <div className="row delivery-form">
+                    <div className="col-md-6">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="First name"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="Last name"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="Address"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="Apartment, suite, etc. (optional)"
+                        name="apartment"
+                        value={formData.apartment}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="Postal code"
+                        name="postalCode"
+                        value={formData.postalCode}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="City"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-12 inp-symbol">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="Phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                      />
+                      <i>
+                        <AiOutlineInfoCircle className="info-icon-phone" />
+                      </i>
+                    </div>
+                  </div>
 
-                <div className="shipping-options">
+                  {/* <div className="shipping-options">
                   <h3>How do you want your order delivered?</h3>
                   <p>
                     Please allow 1 - 4 business days processing time before
@@ -212,14 +288,15 @@ const CheckoutPage = () => {
                       </div>
                     </div>
                   )}
-                </div>
+                </div> */}
 
-                {showAddress && (
-                  <div className="address-input">
-                    <input type="text" placeholder="Enter your address" />
-                  </div>
-                )}
-              </div>
+                  {showAddress && (
+                    <div className="address-input">
+                      <input type="text" placeholder="Enter your address" />
+                    </div>
+                  )}
+                </div>
+              </form>
             </div>
             <div className="payment-gateways">
               <h3 className="section-head">Payment</h3>
@@ -327,6 +404,7 @@ const CheckoutPage = () => {
                       value="paypal"
                       checked={selectedOption === "paypal"}
                       onChange={() => handleOptionChange("paypal")}
+                      disabled={cart.items.length === 0}
                     />
                     <label htmlFor="paypal" className="payment-label">
                       <span>PayPal</span>
@@ -468,9 +546,23 @@ const CheckoutPage = () => {
                 </>
               )}
             </div>
-            <button className="pay-button" disabled={cart.items.length === 0}>
-              {selectedOption === "paypal" ? "PayPal" : "Pay Now"}
-            </button>
+            <div type="submit">
+              {selectedOption === "paypal" && isFormValid() ? (
+                <PayPalButton
+                  totalPrice={totalPrice}
+                  formData={formData}
+                  cartItems={cart.items}
+                  disabled={!isFormValid()}
+                />
+              ) : (
+                <button
+                  className="pay-button"
+                  disabled={cart.items.length === 0 || !isFormValid()}
+                >
+                  Fill the Form First!
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Right Side */}
