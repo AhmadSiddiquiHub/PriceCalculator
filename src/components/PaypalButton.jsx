@@ -150,7 +150,7 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
                   purchase_units: [
                     {
                       amount: {
-                        value: totalPrice.toFixed(2) * 1000,
+                        value: totalPrice.toFixed(2),
                       },
                     },
                   ],
