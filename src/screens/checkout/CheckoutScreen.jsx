@@ -110,7 +110,7 @@ const CheckoutPage = () => {
           <div className="col-md-7 payment-section">
             <div className="checkout-form">
               <div className="checkout-section">
-                <h3 className="section-title">Express checkout</h3>
+                {/* <h3 className="section-title">Express checkout</h3>
                 <div className="checkout-button-container">
                   <button className="checkout-button shop-pay-btn">
                     <img src="/images/shop-pay.webp" alt="Shop Pay" />
@@ -126,7 +126,7 @@ const CheckoutPage = () => {
 
                 <div className="divider">
                   <span className="divider-text">OR</span>
-                </div>
+                </div> */}
                 {/* <button className="log-in-button">Log in</button> */}
               </div>
               <form>
@@ -425,7 +425,7 @@ const CheckoutPage = () => {
                   )}
                 </div>
 
-                <div
+                {/* <div
                   className={`card-cont ${
                     selectedOption === "clearpay" ? "selected" : ""
                   }`}
@@ -497,7 +497,7 @@ const CheckoutPage = () => {
                       </p>
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
               {selectedOption === "card" && (
                 <>
