@@ -635,7 +635,7 @@ const CheckoutPage = () => {
                 <div className="cart-summary">
                   <div className="subtotal">
                     <span>Subtotal</span>
-                    <span>€{totalPrice}</span>
+                    <span>€{totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="shipping">
                     <span>
