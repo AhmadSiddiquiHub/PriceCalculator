@@ -131,7 +131,7 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
 
       if (!existingScript) {
         const script = document.createElement("script");
-        script.src = `https://www.paypal.com/sdk/js?client-id=ARrQcnNYz2lXcm0aIDJjYlxDuP9gIgScjud9_180An4zLeF1xwkhzfs1eftB2ohAtSMKiQ0nJ0m7qj-L&currency=EUR`;
+        script.src = `https://www.paypal.com/sdk/js?client-id=AfrRtWuXBG-Hy8dTeOYvwlJqz-d62gBILBAmUQ9Zam9btKDjzNRxtJTUh89as44o5Mmvjv50YYWno5Wv&currency=EUR`;
         script.async = true;
         script.onload = initializePayPalButton;
         document.body.appendChild(script);
