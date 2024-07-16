@@ -1,129 +1,15 @@
-// import React, { useEffect } from "react";
-// import emailjs from "emailjs-com";
-
-// const PayPalButton = ({ totalPrice = 0, formData, cartItems }) => {
-//   useEffect(() => {
-//     const loadPayPalScript = async () => {
-//       const existingScript = document.querySelector(
-//         'script[src="https://www.paypal.com/sdk/js?client-id=ARrQcnNYz2lXcm0aIDJjYlxDuP9gIgScjud9_180An4zLeF1xwkhzfs1eftB2ohAtSMKiQ0nJ0m7qj-L&currency=EUR"]'
-//       );
-//       if (existingScript) {
-//         const script = document.createElement("script");
-//         script.src =
-//           "https://www.paypal.com/sdk/js?client-id=ARrQcnNYz2lXcm0aIDJjYlxDuP9gIgScjud9_180An4zLeF1xwkhzfs1eftB2ohAtSMKiQ0nJ0m7qj-L&currency=EUR";
-//         script.async = true;
-//         script.onload = () => initializePayPalButton();
-//         document.body.appendChild(script);
-//       } else {
-//         initializePayPalButton();
-//       }
-//     };
-
-//     const initializePayPalButton = () => {
-//       if (window.paypal) {
-//         window.paypal
-//           .Buttons({
-//             createOrder: (data, actions) => {
-//               return actions.order.create({
-//                 purchase_units: [
-//                   {
-//                     amount: {
-//                       value: totalPrice.toFixed(2), // Ensure totalPrice is defined and a number
-//                     },
-//                   },
-//                 ],
-//               });
-//             },
-//             onApprove: (data, actions) => {
-//               return actions.order.capture().then((details) => {
-//                 console.log(
-//                   "Transaction completed by",
-//                   details.payer.name.given_name
-//                 );
-
-//                 // Send email to the customer
-//                 //   const customerEmailParams = {
-//                 //     to_email: formData.email,
-//                 //     subject: "Your Order Confirmation",
-//                 //     message: `Thank you for your purchase! Your order of €${totalPrice.toFixed(
-//                 //       2
-//                 //     )} has been confirmed.`,
-//                 //   };
-//                 //   emailjs
-//                 //     .send(
-//                 //       "service_id",
-//                 //       "template_id",
-//                 //       customerEmailParams,
-//                 //       "user_id"
-//                 //     )
-//                 //     .then(
-//                 //       (response) => {
-//                 //         console.log(
-//                 //           "Email sent to customer:",
-//                 //           response.status,
-//                 //           response.text
-//                 //         );
-//                 //       },
-//                 //       (error) => {
-//                 //         console.error("Failed to send email to customer:", error);
-//                 //       }
-//                 //     );
-
-//                 //   // Send email to the seller/admin
-//                 //   const adminEmailParams = {
-//                 //     to_email: "admin@example.com",
-//                 //     subject: "New Order Received",
-//                 //     message: `A new order has been placed by ${
-//                 //       formData.email
-//                 //     } for a total of €${totalPrice.toFixed(2)}.`,
-//                 //   };
-//                 //   emailjs
-//                 //     .send(
-//                 //       "service_id",
-//                 //       "template_id",
-//                 //       adminEmailParams,
-//                 //       "user_id"
-//                 //     )
-//                 //     .then(
-//                 //       (response) => {
-//                 //         console.log(
-//                 //           "Email sent to admin:",
-//                 //           response.status,
-//                 //           response.text
-//                 //         );
-//                 //       },
-//                 //       (error) => {
-//                 //         console.error("Failed to send email to admin:", error);
-//                 //       }
-//                 //     );
-//               });
-//             },
-//             onError: (err) => {
-//               console.error("PayPal error:", err);
-//             },
-//           })
-//           .render("#paypal-button-container");
-//       }
-//     };
-
-//     loadPayPalScript();
-//   }, [totalPrice, formData, cartItems]);
-
-//   return <div id="paypal-button-container"></div>;
-// };
-
-// export default PayPalButton;
-
 import React, { useEffect, useRef } from "react";
+import emailjs from "emailjs-com";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
   const paypalRef = useRef(null);
   const initialized = useRef(false);
 
-  console.log("FormData: ", formData);
-
   useEffect(() => {
     if (disabled) return;
+
     const loadPayPalScript = () => {
       const existingScript = document.querySelector(
         'script[src*="paypal.com/sdk/js"]'
@@ -131,7 +17,9 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
 
       if (!existingScript) {
         const script = document.createElement("script");
-        script.src = `https://www.paypal.com/sdk/js?client-id=AfrRtWuXBG-Hy8dTeOYvwlJqz-d62gBILBAmUQ9Zam9btKDjzNRxtJTUh89as44o5Mmvjv50YYWno5Wv&currency=EUR`;
+        script.src = `https://www.paypal.com/sdk/js?client-id=${
+          import.meta.env.VITE_PAYPAL_CLIENT_ID
+        }&currency=EUR`;
         script.async = true;
         script.onload = initializePayPalButton;
         document.body.appendChild(script);
@@ -159,7 +47,11 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
               onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log("Transaction completed:", order);
-                // Optionally handle successful transaction here
+                toast.success("Payment successful!");
+
+                // Send emails
+                sendEmailToCustomer();
+                sendEmailToSeller();
               },
               onError: (err) => {
                 console.error("PayPal error:", err);
@@ -178,6 +70,92 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
       }
     };
 
+    const formatCartItems = (items) => {
+      return items.map((item) => ({
+        name: item.name || "",
+        category: item.category || "",
+        dimensions: item.dimensions || "",
+        color: item.color || "",
+        motor: item.motor ? item.motor.name : "",
+        cable: item.cable || "",
+        price: item.price ? item.price.toFixed(2) : "",
+        quantity: item.quantity || 0,
+        image: item.image || "",
+      }));
+    };
+
+    const products = formatCartItems(cartItems);
+
+    const sendEmailToCustomer = () => {
+      const templateParams = {
+        firstName: formData.firstName || "",
+        lastName: formData.lastName || "",
+        from_email: "voletmarket@bigstrategy.eu",
+        to_email: formData.email,
+        email: formData.email || "",
+        phone: formData.phone || "",
+        address: formData.address || "",
+        apartment: formData.apartment || "",
+        city: formData.city || "",
+        postalCode: formData.postalCode || "",
+        country: formData.country.label || "",
+        cartItems: products,
+        totalPrice: totalPrice.toFixed(2),
+      };
+
+      emailjs
+        .send(
+          import.meta.env.VITE_EMAIL_SERVICE_ID,
+          import.meta.env.VITE_EMAIL_CUSTOMER_TEMPLATE_ID,
+          templateParams,
+          import.meta.env.VITE_EMAIL_PUBLIC_KEY
+        )
+        .then((response) => {
+          console.log(
+            "Email sent to customer successfully!",
+            response.status,
+            response.text
+          );
+        })
+        .catch((err) => {
+          console.error("Failed to send email to customer:", err);
+        });
+    };
+
+    const sendEmailToSeller = () => {
+      const templateParams = {
+        firstName: formData.firstName || "",
+        lastName: formData.lastName || "",
+        from_email: "voletmarket@bigstrategy.eu",
+        email: formData.email || "",
+        phone: formData.phone || "",
+        address: formData.address || "",
+        apartment: formData.apartment || "",
+        city: formData.city || "",
+        postalCode: formData.postalCode || "",
+        country: formData.country.label || "",
+        cartItems: products,
+        totalPrice: totalPrice.toFixed(2),
+      };
+
+      emailjs
+        .send(
+          import.meta.env.VITE_EMAIL_SERVICE_ID,
+          import.meta.env.VITE_EMAIL_SELLER_TEMPLATE_ID,
+          templateParams,
+          import.meta.env.VITE_EMAIL_PUBLIC_KEY
+        )
+        .then((response) => {
+          console.log(
+            "Email sent to seller successfully!",
+            response.status,
+            response.text
+          );
+        })
+        .catch((err) => {
+          console.error("Failed to send email to seller:", err);
+        });
+    };
     loadPayPalScript();
 
     // Clean up function
@@ -187,7 +165,7 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
       }
       initialized.current = false;
     };
-  }, [totalPrice]);
+  }, [totalPrice, disabled]);
 
   return <div ref={paypalRef} id="paypal-button-container"></div>;
 };

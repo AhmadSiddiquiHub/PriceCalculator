@@ -10,6 +10,7 @@ import ProductScreen7 from "./screens/products/ProductScreen7";
 import ProductScreen8 from "./screens/products/ProductScreen8";
 import CheckoutScreen from "./screens/checkout/CheckoutScreen";
 import cartStore from "./store";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const handleAddToCart = (product) => {
@@ -17,8 +18,8 @@ function App() {
   };
   return (
     <Router>
+      <Header />
       <main>
-        <Header />
         <Routes>
           <Route
             exact
@@ -55,6 +56,7 @@ function App() {
           />
           <Route path="/checkout" element={<CheckoutScreen />} />
         </Routes>
+        <ToastContainer />
       </main>
     </Router>
   );
