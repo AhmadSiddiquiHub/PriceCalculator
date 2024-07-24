@@ -222,7 +222,7 @@ const ProductScreen6 = ({ onAddToCart }) => {
       category: "VOLET",
       dimensions: `${selectedLength} X ${selectedWidth}`,
       color: selectedColor,
-      image: "/images/prod-img.png",
+      image: "/images/prod-5.png",
       price: price,
       quantity: 1,
     };
@@ -236,7 +236,7 @@ const ProductScreen6 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 left">
             <img
               className="prod-img"
-              src="/images/prod-img.png"
+              src="/images/prod-5.png"
               alt="Product Image"
             />
           </div>
