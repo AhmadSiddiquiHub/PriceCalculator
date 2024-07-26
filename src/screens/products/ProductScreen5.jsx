@@ -388,7 +388,7 @@ const ProductScreen5 = ({ onAddToCart }) => {
       motor: selectedMotor,
       interrupteur: selectedInter,
       cable: selectedCableType,
-      image: "/images/prod-6.png",
+      image: "/images/prod-img.png",
       price: price,
       quantity: 1,
     };
@@ -402,7 +402,7 @@ const ProductScreen5 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 left">
             <img
               className="prod-img"
-              src="/images/prod-6.png"
+              src="/images/prod-img.png"
               alt="Product Image"
             />
           </div>
