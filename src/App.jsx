@@ -8,6 +8,9 @@ import ProductScreen5 from "./screens/products/ProductScreen5";
 import ProductScreen6 from "./screens/products/ProductScreen6";
 import ProductScreen7 from "./screens/products/ProductScreen7";
 import ProductScreen8 from "./screens/products/ProductScreen8";
+import ProductScreen9 from "./screens/products/ProductScreen9";
+import ProductScreen10 from "./screens/products/ProductScreen10";
+import ProductScreen11 from "./screens/products/ProductScreen11";
 import CheckoutScreen from "./screens/checkout/CheckoutScreen";
 import cartStore from "./store";
 import { ToastContainer } from "react-toastify";
@@ -52,7 +55,19 @@ function App() {
           />
           <Route
             path="/8"
-            element={<ProductScreen8 onAddToCart={handleAddToCart} s />}
+            element={<ProductScreen8 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/9"
+            element={<ProductScreen9 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/10"
+            element={<ProductScreen10 onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/11"
+            element={<ProductScreen11 onAddToCart={handleAddToCart} />}
           />
           <Route path="/checkout" element={<CheckoutScreen />} />
         </Routes>
