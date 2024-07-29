@@ -115,7 +115,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
   const handleAddToCart = () => {
     const product = {
       id: 9,
-      name: "TABLIER ALU 37",
+      name: "TABLIER PVC 37",
       category: "VOLET",
       dimensions: `${selectedLength} X ${selectedWidth}`,
       color: selectedColor,
@@ -139,7 +139,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
           </div>
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
-              Personnalisez votre <br /> TABLIER ALU 37
+              Personnalisez votre <br /> TABLIER PVC 37
             </h1>
 
             <div className="dimensions">
