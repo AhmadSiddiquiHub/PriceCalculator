@@ -160,11 +160,21 @@ const prices = [
 const colorMap = {
   Blanc: "#ffffff",
   "Maron Jamaique": "#5b5454",
+  "Blanc Crème": "#dfd9c3",
   "Gris Anthracite": "#363b3b",
+  Naturel: "#c0beba",
+  "Gris Clair": "#a6a89b",
 };
 
 // Colors array
-const colors = ["Blanc", "Maron Jamaique", "Gris Anthracite"];
+const colors = [
+  "Blanc",
+  "Maron Jamaique",
+  "Blanc Crème",
+  "Gris Anthracite",
+  "Naturel",
+  "Gris Clair",
+];
 
 const ProductScreen3 = ({ onAddToCart }) => {
   const [selectedLength, setSelectedLength] = useState(lengths[0]);
