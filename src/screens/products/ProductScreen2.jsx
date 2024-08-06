@@ -416,7 +416,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
             <div className="dimensions">
               <h2 className="sub-head">DIMENSIONS</h2>
               <div className="row dim-cont">
-                <div className="col-6 sel-inp">
+                <div className="col-6 sel-inp dimension-back-1">
                   <label className="labels">
                     <span className="labels-head">Largeur</span>
                     <br />
@@ -424,7 +424,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
                   </label>
                   <input
                     type="number"
-                    className="field__input"
+                    className="field__input dimension-inp-left"
                     value={selectedWidth}
                     min={Math.min(...widths)}
                     max={Math.max(...widths)}
@@ -436,7 +436,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
                     petite
                   </p>
                 </div>
-                <div className="col-6 sel-inp">
+                <div className="col-6 sel-inp dimension-back-2">
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
@@ -444,7 +444,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
                   </label>
                   <input
                     type="number"
-                    className="field__input"
+                    className="field__input dimension-inp-right"
                     value={selectedLength}
                     min={Math.min(...lengths)}
                     max={Math.max(...lengths)}
