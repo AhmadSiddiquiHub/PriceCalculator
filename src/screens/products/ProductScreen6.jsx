@@ -242,7 +242,8 @@ const ProductScreen6 = ({ onAddToCart }) => {
           </div>
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
-              Personnalisez votre <br /> TABLIER ALU 42
+              <span className="sub-heading">Personnalisez votre</span> <br />
+              TABLIER ALU 42
             </h1>
 
             <div className="dimensions">
@@ -263,10 +264,10 @@ const ProductScreen6 = ({ onAddToCart }) => {
                     step="0.1"
                     onChange={handleWidthChange}
                   />
-                  <p>
+                  {/* <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
                     petite
-                  </p>
+                  </p> */}
                 </div>
                 <div className="col-6 sel-inp dimension-back-2">
                   <label className="labels">
@@ -283,15 +284,15 @@ const ProductScreen6 = ({ onAddToCart }) => {
                     step="0.1"
                     onChange={handleLengthChange}
                   />
-                  <p>
+                  {/* <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus
                     petite
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
 
-            <hr className="custom" />
+            {/* <hr className="custom" /> */}
 
             <div className="colors">
               <h1 className="sub-head">COULEURS</h1>

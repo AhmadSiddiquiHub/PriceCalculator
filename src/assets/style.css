@@ -1,9 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap");
 
 body {
+  /* font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal; */
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
+  font-weight: 400;
   font-style: normal;
+}
+
+.right {
+  padding: 0px;
 }
 
 .container {
@@ -17,10 +26,13 @@ body {
 .prod-img {
   width: 100%;
   max-height: 100%;
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 .dim-cont {
   text-align: center;
+  margin: 0px;
 }
 
 .main-head {
@@ -28,7 +40,12 @@ body {
   font-family: "Inter";
   margin-bottom: 30px;
   font-size: 30px;
-  font-weight: bolder;
+  font-weight: 900 !important;
+}
+
+.sub-heading {
+  font-size: 30px !important;
+  font-weight: 200 !important;
 }
 
 .sub-head {
@@ -36,13 +53,13 @@ body {
   margin-top: 20px;
   margin-bottom: 25px;
   color: #333e48;
-  font-weight: bolder;
+  font-weight: 900 !important;
   font-family: "Inter";
 }
 
 .labels {
   line-height: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   margin-top: 25px;
   font-size: 12px;
 }
@@ -106,12 +123,21 @@ hr.custom {
 }
 
 .field__input {
-  width: 100%;
+  width: 95%;
   box-sizing: border-box;
   border-radius: 50px;
   outline: none;
   padding: 6px 10px;
   font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.colors {
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 .colors-container {
@@ -124,11 +150,11 @@ hr.custom {
   height: 90px;
   position: relative;
   cursor: pointer;
-  display: none; /* Hide the actual radio button */
+  display: none;
 }
 
 .color-wrapper {
-  flex: 0 0 20%; /* 100% divided by 5 items per row */
+  flex: 0 0 20%;
   box-sizing: border-box;
   padding: 10px;
   text-align: center;
@@ -143,9 +169,9 @@ hr.custom {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto; /* Center the circle */
+  margin: 0 auto;
   cursor: pointer;
-  transition: height 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+  transition: height 0.3s ease, border-color 0.3s ease;
 }
 
 .color-label {
@@ -154,6 +180,13 @@ hr.custom {
   font-weight: 900;
   font-family: "Inter";
   font-size: 9px;
+}
+
+.interrupteurs {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 30px;
 }
 
 /* When the radio button is checked, increase the height of the circle */
@@ -166,10 +199,15 @@ hr.custom {
   margin-bottom: 10px;
 }
 
-.motor-container,
+.motor-container {
+  display: flex;
+  justify-content: center;
+}
+
 .interrupteur-container {
   display: flex;
-  justify-content: center; /* Center items horizontally */
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .radio-img-option {
@@ -182,15 +220,16 @@ hr.custom {
 }
 
 .radio-img-square {
-  display: inline-flex; /* Change to inline-flex */
+  display: inline-flex;
   align-items: center;
-  justify-content: center; /* Center items horizontally */
+  justify-content: center;
   cursor: pointer;
-  border: 3px solid #ccc; /* Add border to create a square */
-  border-radius: 12px; /* Add border radius to round corners */
-  /* padding: 10px 5px; */
+  border: 3px solid #ccc;
+  border-radius: 12px;
   max-width: 200px;
   background-color: #fed602;
+  max-height: 83px;
+  margin-left: 10px;
 }
 
 .radio-img-image {
@@ -285,12 +324,18 @@ hr.custom {
   width: 100%;
   background-color: #e6e6e6;
   padding: 30px 0px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 
   .tot-text {
     color: #333e48;
     font-weight: bolder;
     font-size: 60px;
     text-align: center;
+    margin-top: 10px;
   }
 }
 
@@ -1173,6 +1218,12 @@ input[type="radio"]:checked + label .option-label {
 @media only screen and (max-width: 767px) {
   .right-sec {
     position: relative !important;
+  }
+  .right {
+    padding: 10px;
+  }
+  .main-head {
+    font-size: 27px;
   }
 }
 

@@ -434,7 +434,8 @@ const ProductScreen4 = ({ onAddToCart }) => {
           </div>
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
-              Personnalisez votre <br /> VOLET MINI INDUS ALU 55
+              <span className="sub-heading">Personnalisez votre</span> <br />
+              VOLET MINI INDUS ALU 55
             </h1>
 
             <div className="dimensions">
@@ -455,10 +456,10 @@ const ProductScreen4 = ({ onAddToCart }) => {
                     step="0.1"
                     onChange={handleWidthChange}
                   />
-                  <p>
+                  {/* <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
                     petite
-                  </p>
+                  </p> */}
                 </div>
                 <div className="col-6 sel-inp dimension-back-2">
                   <label className="labels">
@@ -475,15 +476,15 @@ const ProductScreen4 = ({ onAddToCart }) => {
                     step="0.1"
                     onChange={handleLengthChange}
                   />
-                  <p>
+                  {/* <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus
                     petite
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
 
-            <hr className="custom" />
+            {/* <hr className="custom" /> */}
 
             <div className="colors">
               <h1 className="sub-head">COULEURS</h1>
@@ -511,7 +512,7 @@ const ProductScreen4 = ({ onAddToCart }) => {
               </div>
             </div>
 
-            <hr className="custom" />
+            {/* <hr className="custom" /> */}
 
             <div className="motors">
               <h1 className="sub-head">MOTEURS</h1>
@@ -549,7 +550,7 @@ const ProductScreen4 = ({ onAddToCart }) => {
 
             {selectedMotor && (
               <>
-                <hr className="custom" />
+                {/* <hr className="custom" /> */}
                 <div className="interrupteurs">
                   <h1 className="sub-head">INTERRUPTEURS</h1>
                   <div className="interrupteur-container">
@@ -586,7 +587,7 @@ const ProductScreen4 = ({ onAddToCart }) => {
               </>
             )}
 
-            <hr className="custom" />
+            {/* <hr className="custom" /> */}
 
             <div className="cables">
               <h1 className="sub-head">SORITE DE CABLE</h1>
@@ -614,7 +615,7 @@ const ProductScreen4 = ({ onAddToCart }) => {
               </div>
             </div>
 
-            <hr className="custom" />
+            {/* <hr className="custom" /> */}
 
             <div className="total">
               <h2 className="tot-text">
