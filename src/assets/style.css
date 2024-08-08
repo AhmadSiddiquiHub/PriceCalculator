@@ -1223,7 +1223,7 @@ input[type="radio"]:checked + label .option-label {
     padding: 10px;
   }
   .main-head {
-    font-size: 27px;
+    font-size: 25px;
   }
 }
 
