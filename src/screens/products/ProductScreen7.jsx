@@ -278,7 +278,11 @@ const ProductScreen3 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
               <span className="sub-heading">Personnalisez votre</span> <br />
-              TABLIER ALU 55
+              <div class="spaced-text">
+                <span>T A B L I E R</span>
+                <span>A L U</span>
+                <span>5 5</span>
+              </div>
             </h1>
 
             <div className="dimensions">

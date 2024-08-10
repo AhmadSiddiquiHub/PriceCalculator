@@ -435,7 +435,13 @@ const ProductScreen4 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
               <span className="sub-heading">Personnalisez votre</span> <br />
-              VOLET MINI INDUS ALU 55
+              <div class="spaced-text">
+                <span>V O L E T</span>
+                <span>M I N I</span>
+                <span>I N D U S</span>
+                <span>A L U</span>
+                <span>5 5</span>
+              </div>
             </h1>
 
             <div className="dimensions">
