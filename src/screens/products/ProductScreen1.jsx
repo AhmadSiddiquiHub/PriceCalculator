@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 // Length and Width arrays
 const lengths = [
@@ -532,7 +533,27 @@ const ProductScreen1 = ({ onAddToCart }) => {
                         alt={`Image for ${motor.name}`}
                         className="radio-img-image"
                       />
-                      <span className="radio-img-text">{motor.name}</span>
+
+                      <div className="motor-text">
+                        <span className="radio-img-text">{motor.name}</span>
+                        <div className="stars">
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                        </div>
+                      </div>
                     </div>
                   </label>
                 ))}

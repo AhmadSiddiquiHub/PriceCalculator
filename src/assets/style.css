@@ -253,6 +253,20 @@ hr.custom {
   text-align: center;
 }
 
+.stars {
+  margin-top: 5px;
+}
+
+.stars i {
+  color: #343f49;
+  font-size: 12px;
+}
+
+.motor-text {
+  text-align: center;
+  line-height: 10px;
+}
+
 /* Add a class to style the highlighted motor square */
 .motor-selected {
   border-color: #fed702; /* Change the border color when selected */
