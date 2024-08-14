@@ -218,12 +218,28 @@ hr.custom {
 }
 
 .radio-img-option {
-  display: inline-block; /* Change to inline-block */
+  display: inline-block;
   margin-right: 20px;
 }
 
+.inter-img-option {
+  margin-right: 0px;
+}
+
+.inter-img-option.first-item .inter-img-text {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-right: 2px solid transparent;
+}
+
+.inter-img-option.last-item .inter-img-text {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-left: 2px solid transparent;
+}
+
 .radio-img-radio {
-  display: none; /* Hide the actual radio button */
+  display: none;
 }
 
 .radio-img-square {
@@ -242,6 +258,8 @@ hr.custom {
 .inter-img-text {
   padding: 12px;
   max-width: 170px;
+  margin: 0px;
+  border-radius: 0px;
 }
 
 .radio-img-image {
@@ -1267,6 +1285,10 @@ input[type="radio"]:checked + label .option-label {
   }
   .color-label {
     font-size: 7.6px;
+  }
+  .inter-img-text {
+    border: 3px solid #ccc !important;
+    border-radius: 12px;
   }
 }
 
