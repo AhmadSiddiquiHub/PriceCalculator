@@ -572,10 +572,10 @@ const ProductScreen2 = ({ onAddToCart }) => {
                           onChange={handleInterrupteurChange}
                           className="radio-img-radio"
                         />
-                        <div className="radio-img-square">
+                        <div className="radio-img-square inter-img-text">
                           <img
                             src={interrupteur.imagePath}
-                            className="radio-img-image"
+                            className="radio-img-image inter-img"
                             alt={`Interrupteur ${interrupteur.id}`}
                           />
                           <span className="radio-img-text">

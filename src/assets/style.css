@@ -239,11 +239,22 @@ hr.custom {
   margin-left: 10px;
 }
 
+.inter-img-text {
+  padding: 12px;
+  max-width: 170px;
+}
+
 .radio-img-image {
   width: 95px;
   height: 80px;
   border-radius: 12px 0px 0px 12px;
   margin-right: 10px;
+}
+
+.inter-img {
+  width: 65px;
+  height: 60px;
+  border-radius: 0px;
 }
 
 .radio-img-text {
@@ -265,6 +276,7 @@ hr.custom {
 .motor-text {
   text-align: center;
   line-height: 10px;
+  margin-right: 9px;
 }
 
 /* Add a class to style the highlighted motor square */
@@ -296,7 +308,7 @@ hr.custom {
 }
 
 .cable-wrapper {
-  width: calc(28% - 20px);
+  width: calc(23% - 5px);
   margin-right: 20px;
   margin-bottom: 20px;
 }
@@ -319,8 +331,8 @@ hr.custom {
 }
 
 .cable img {
-  max-width: 100%; /* Ensure the image does not exceed its container */
-  max-height: 100%; /* Ensure the image does not exceed its container */
+  max-width: 85%;
+  max-height: 85%;
   border: 3px solid transparent;
   border-radius: 50%;
   transition: border-color 0.3s ease;
@@ -328,7 +340,7 @@ hr.custom {
 
 .cable-label {
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bolder;
 }
 
@@ -1245,10 +1257,16 @@ input[type="radio"]:checked + label .option-label {
     padding: 10px;
   }
   .main-head {
-    font-size: 25px;
+    font-size: 18px;
+  }
+  .sub-head {
+    font-size: 16px;
   }
   .cable-label {
-    font-size: 9px;
+    font-size: 8px;
+  }
+  .color-label {
+    font-size: 7.6px;
   }
 }
 
