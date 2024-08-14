@@ -628,7 +628,7 @@ const ProductScreen5 = ({ onAddToCart }) => {
             <div className="total">
               <h2 className="tot-text">
                 {price !== null
-                  ? `$${price.toFixed(2)}€`
+                  ? `${price.toFixed(2)}€`
                   : "Price not available"}
               </h2>
             </div>
