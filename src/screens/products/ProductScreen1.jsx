@@ -566,42 +566,34 @@ const ProductScreen1 = ({ onAddToCart }) => {
                 <div className="interrupteurs">
                   <h1 className="sub-head">INTERRUPTEURS</h1>
                   <div className="interrupteur-container">
-                    {interrupteurs[selectedMotor.id - 1].map(
-                      (interrupteur, index) => (
-                        <label
-                          className={`radio-img-option inter-img-option ${
-                            selectedInterrupteur === interrupteur.id
-                              ? "interrupteur-selected"
-                              : ""
-                          } ${
-                            index === 0 || index === 2
-                              ? "first-item"
-                              : index === 1 || index === 3
-                              ? "last-item"
-                              : ""
-                          }`}
-                          key={interrupteur.id}
-                        >
-                          <input
-                            type="radio"
-                            value={interrupteur.id}
-                            checked={selectedInterrupteur === interrupteur.id}
-                            onChange={handleInterrupteurChange}
-                            className="radio-img-radio"
+                    {interrupteurs[selectedMotor.id - 1].map((interrupteur) => (
+                      <label
+                        className={`radio-img-option inter-img-option ${
+                          selectedInterrupteur === interrupteur.id
+                            ? "interrupteur-selected"
+                            : ""
+                        }`}
+                        key={interrupteur.id}
+                      >
+                        <input
+                          type="radio"
+                          value={interrupteur.id}
+                          checked={selectedInterrupteur === interrupteur.id}
+                          onChange={handleInterrupteurChange}
+                          className="radio-img-radio"
+                        />
+                        <div className="radio-img-square inter-img-text">
+                          <img
+                            src={interrupteur.imagePath}
+                            className="radio-img-image inter-img"
+                            alt={`Interrupteur ${interrupteur.id}`}
                           />
-                          <div className="radio-img-square inter-img-text">
-                            <img
-                              src={interrupteur.imagePath}
-                              className="radio-img-image inter-img"
-                              alt={`Interrupteur ${interrupteur.id}`}
-                            />
-                            <span className="radio-img-text">
-                              {interrupteur.name}
-                            </span>
-                          </div>
-                        </label>
-                      )
-                    )}
+                          <span className="radio-img-text">
+                            {interrupteur.name}
+                          </span>
+                        </div>
+                      </label>
+                    ))}
                   </div>
                 </div>
               </>

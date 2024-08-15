@@ -25,9 +25,9 @@ body {
 }
 
 .prod-img {
-  margin-top: 50px;
+  margin-top: 60px;
   width: 100%;
-  height: 650px;
+  max-height: 100%;
   margin-left: 0px;
   padding-left: 0px;
 }
@@ -222,22 +222,6 @@ hr.custom {
   margin-right: 20px;
 }
 
-.inter-img-option {
-  margin-right: 0px;
-}
-
-.inter-img-option.first-item .inter-img-text {
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  border-right: 2px solid transparent;
-}
-
-.inter-img-option.last-item .inter-img-text {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-  border-left: 2px solid transparent;
-}
-
 .radio-img-radio {
   display: none;
 }
@@ -259,7 +243,7 @@ hr.custom {
   padding: 12px;
   max-width: 170px;
   margin: 0px;
-  border-radius: 0px;
+  border-radius: 12px;
 }
 
 .radio-img-image {
