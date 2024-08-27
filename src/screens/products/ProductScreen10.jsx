@@ -141,26 +141,70 @@ const ProductScreen3 = ({ onAddToCart }) => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [price, setPrice] = useState(null);
 
+  const minLength = Math.min(...lengths);
+  const maxLength = Math.max(...lengths);
+
   const handleLengthChange = (e) => {
     const value = e.target.value;
+    // Check if the input is empty or a valid number
     if (value === "" || /^-?\d*\.?\d*$/.test(value)) {
-      setSelectedLength(value);
-      const newLength = parseFloat(value);
-      if (!isNaN(newLength)) {
-        updatePrice(newLength, selectedWidth, selectedColor);
-      }
+      setSelectedLength(value); // Update state with raw input
     }
   };
+
+  const handleLengthBlur = () => {
+    let newLength = parseFloat(selectedLength);
+
+    if (isNaN(newLength)) {
+      newLength = minLength; // Reset to min if invalid
+    }
+
+    // Enforce minimum and maximum constraints
+    if (newLength < minLength) {
+      newLength = minLength;
+    } else if (newLength > maxLength) {
+      newLength = maxLength;
+    }
+
+    setSelectedLength(newLength); // Update state with constrained value
+
+    updatePrice(
+      newLength,
+      selectedWidth,
+      selectedColor,
+      selectedMotor,
+      selectedInterrupteur
+    );
+  };
+
+  const minWidth = Math.min(...widths);
+  const maxWidth = Math.max(...widths);
 
   const handleWidthChange = (e) => {
     const value = e.target.value;
     if (value === "" || /^-?\d*\.?\d*$/.test(value)) {
       setSelectedWidth(value);
-      const newWidth = parseFloat(value);
-      if (!isNaN(newWidth)) {
-        updatePrice(selectedLength, newWidth, selectedColor);
-      }
     }
+  };
+
+  const handleWidthBlur = () => {
+    let newWidth = parseFloat(selectedWidth);
+    if (isNaN(newWidth)) {
+      newWidth = minWidth;
+    }
+    if (newWidth < minWidth) {
+      newWidth = minWidth;
+    } else if (newWidth > maxWidth) {
+      newWidth = maxWidth;
+    }
+    setSelectedWidth(newWidth);
+    updatePrice(
+      selectedLength,
+      newWidth,
+      selectedColor,
+      selectedMotor,
+      selectedInterrupteur
+    );
   };
 
   const handleColorChange = (e) => {
@@ -255,10 +299,11 @@ const ProductScreen3 = ({ onAddToCart }) => {
                     type="number"
                     className="field__input dimension-inp-left"
                     value={selectedWidth}
-                    min={Math.min(...widths)}
-                    max={Math.max(...widths)}
+                    min={minWidth}
+                    max={maxWidth}
                     step="0.1"
                     onChange={handleWidthChange}
+                    onBlur={handleWidthBlur}
                   />
                   {/* <p>
                     Mesurez la largeur entre murs en 3 points et gardez la plus
@@ -269,16 +314,17 @@ const ProductScreen3 = ({ onAddToCart }) => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    Min (1200m) & Max (3500m)
+                    Min (800m) & Max (3500m)
                   </label>
                   <input
                     type="number"
                     className="field__input dimension-inp-right"
                     value={selectedLength}
-                    min={Math.min(...lengths)}
-                    max={Math.max(...lengths)}
+                    min={minLength}
+                    max={maxLength}
                     step="0.1"
                     onChange={handleLengthChange}
+                    onBlur={handleLengthBlur}
                   />
                   {/* <p>
                     Mesurez la hauteur entre murs en 3 points et gardez la plus

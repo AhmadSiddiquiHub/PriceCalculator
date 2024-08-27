@@ -46,7 +46,7 @@ body {
 }
 
 .spaced-text span {
-  margin-right: 0.5em; /* Double space between words */
+  margin-right: 0.5em;
 }
 
 .sub-heading {
@@ -767,7 +767,7 @@ button[type="submit"]:hover {
 }
 
 .item-details {
-  flex-grow: 1;
+  flex-grow: 0.8;
   padding: 0 10px;
   margin-top: 20px;
 
@@ -1248,6 +1248,30 @@ input[type="radio"]:checked + label .option-label {
 @media only screen and (max-width: 600px) {
   .popup-content {
     width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 912px) {
+  .spaced-text span {
+    font-size: 21px;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .spaced-text span {
+    font-size: 19px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .spaced-text span {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .spaced-text span {
+    font-size: 16px;
   }
 }
 
