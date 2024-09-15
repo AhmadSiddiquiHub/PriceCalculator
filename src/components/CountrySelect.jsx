@@ -32,7 +32,12 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 
 const CountrySelect = ({ value, onChange }) => {
-  const options = countryList().getData();
+  const allOptions = countryList().getData();
+
+  // Filter the country list to include only France, Belgium, and Luxembourg
+  const options = allOptions.filter((option) =>
+    ["France", "Belgium", "Luxembourg"].includes(option.label)
+  );
 
   const changeHandler = (value) => {
     onChange(value);
@@ -41,7 +46,7 @@ const CountrySelect = ({ value, onChange }) => {
   useEffect(() => {
     if (!value) {
       const defaultCountry = options.find(
-        (option) => option.label === "Germany"
+        (option) => option.label === "Belgium"
       );
       onChange(defaultCountry);
     }

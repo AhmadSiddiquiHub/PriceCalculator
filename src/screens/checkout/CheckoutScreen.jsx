@@ -131,27 +131,6 @@ const CheckoutPage = () => {
               </div>
               <form>
                 <div className="checkout-section">
-                  <h3 className="section-head">Contact</h3>
-                  <input
-                    className="inp-outline"
-                    type="text"
-                    placeholder="Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-                  <div className="checkbox-container">
-                    <input
-                      type="checkbox"
-                      id="customCheckbox"
-                      className="custom-checkbox"
-                    />
-
-                    <span>Email me with news and offers</span>
-                  </div>
-                </div>
-                <div className="checkout-section">
                   <h3 className="section-head">Delivery</h3>
                   <CountrySelect
                     value={formData.country}
@@ -188,16 +167,6 @@ const CheckoutPage = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-                    <div className="col-md-12">
-                      <input
-                        className="inp-outline"
-                        type="text"
-                        placeholder="Apartment, suite, etc. (optional)"
-                        name="apartment"
-                        value={formData.apartment}
-                        onChange={handleInputChange}
-                      />
-                    </div>
                     <div className="col-md-6">
                       <input
                         className="inp-outline"
@@ -216,6 +185,17 @@ const CheckoutPage = () => {
                         name="city"
                         value={formData.city}
                         onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <input
+                        className="inp-outline"
+                        type="text"
+                        placeholder="Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className="col-md-12 inp-symbol">
@@ -499,52 +479,6 @@ const CheckoutPage = () => {
                   )}
                 </div> */}
               </div>
-              {selectedOption === "card" && (
-                <>
-                  <h3 className="section-head">Remember me</h3>
-                  <div className="remember-me-container">
-                    <div className="remember-checkbox-container">
-                      <input
-                        type="checkbox"
-                        id="remember-me"
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                      />
-                      <label htmlFor="remember-me">
-                        Save my information for a faster checkout
-                      </label>
-                    </div>
-                    {isChecked && (
-                      <div className="additional-content">
-                        <div className="phone-input">
-                          <div className="mobile-inp">
-                            <i className="icon">
-                              <RiSmartphoneLine />
-                            </i>
-                            <input
-                              className="inp-outline"
-                              type="text"
-                              id="phone-number"
-                              name="phone-number"
-                              placeholder="Mobile phone number"
-                            />
-                          </div>
-                        </div>
-                        <p className="info-text">
-                          Next time you check out here or on other stores
-                          powered by Shopify, you’ll receive a code by text
-                          message to securely purchase with Shop Pay.
-                        </p>
-                        <p className="terms-text">
-                          By continuing, you agree to Shop Pay’s{" "}
-                          <a href="#">Privacy Policy</a> and{" "}
-                          <a href="#">Terms of Service</a>.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
             </div>
             <div type="submit">
               {selectedOption === "paypal" && isFormValid() ? (
@@ -623,15 +557,6 @@ const CheckoutPage = () => {
                   </div>
                 ))}
                 <hr />
-                <div className="discount-code">
-                  <input
-                    type="text"
-                    placeholder="Discount code or gift card"
-                    value={discountCode}
-                    onChange={(e) => setDiscountCode(e.target.value)}
-                  />
-                  <button onClick={handleApplyDiscount}>Apply</button>
-                </div>
                 <div className="cart-summary">
                   <div className="subtotal">
                     <span>Subtotal</span>

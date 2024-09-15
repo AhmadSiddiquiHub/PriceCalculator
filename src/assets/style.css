@@ -45,6 +45,10 @@ body {
   font-weight: 900 !important;
 }
 
+.spaced-text {
+  margin-top: 8px;
+}
+
 .spaced-text span {
   margin-right: 0.5em;
 }
@@ -198,7 +202,7 @@ hr.custom {
 
 /* When the radio button is checked, increase the height of the circle */
 .radio_opt:checked + .color {
-  border-color: #fed702; /* Optional: Change border color for better visibility */
+  border-color: #333333; /* Optional: Change border color for better visibility */
 }
 
 .radio-img-label {
@@ -283,15 +287,15 @@ hr.custom {
 
 /* Add a class to style the highlighted motor square */
 .motor-selected {
-  border-color: #fed702; /* Change the border color when selected */
+  border-color: #333333; /* Change the border color when selected */
 }
 .interrupteur-selected {
-  border-color: #fed702; /* Change the border color when selected */
+  border-color: #333333; /* Change the border color when selected */
 }
 
 /* Style the radio button when checked */
 .radio-img-radio:checked + .radio-img-square {
-  border-color: #fed702; /* Change the border color when checked */
+  border-color: #333333; /* Change the border color when checked */
 }
 
 .cables {
@@ -348,7 +352,7 @@ hr.custom {
 
 /* Style the cable image when checked */
 .radio_opt:checked + .cable img {
-  border-color: #fed702; /* Change border color when selected */
+  border-color: #333333; /* Change border color when selected */
 }
 
 /* Style the cable wrapper when checked */
@@ -369,7 +373,7 @@ hr.custom {
   .tot-text {
     color: #333e48;
     font-weight: bolder;
-    font-size: 60px;
+    font-size: 40px;
     text-align: center;
     margin-top: 10px;
   }
@@ -1322,4 +1326,60 @@ input[type="radio"]:checked + label .option-label {
 
 .cart-action {
   display: flex;
+}
+
+/* Footer Section */
+.footer {
+  background-color: #f8f8f8;
+  /* padding: 60px 0px 60px 0px; */
+}
+
+.foot-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 0px 60px 0px;
+}
+
+.icon-cont {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+
+  .foot-icon {
+    margin-right: 15px;
+    font-size: 45px;
+    color: #fed702;
+  }
+
+  span {
+    color: #333e48;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 0px;
+    padding: 0px;
+    color: #333e48;
+    font-size: 18px;
+  }
+}
+
+.foot-contact {
+  h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333e48;
+  }
+
+  p {
+    margin: 0px;
+    padding: 0px;
+    color: #333e48;
+  }
+}
+
+.foot-logo img {
+  width: 200px;
+  height: auto;
 }

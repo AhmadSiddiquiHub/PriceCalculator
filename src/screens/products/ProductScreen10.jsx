@@ -256,7 +256,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
       id: 10,
       name: "TABLIER PVC 50",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       image: "/images/prod-3.png",
       price: price,

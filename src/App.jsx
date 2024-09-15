@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import ProductScreen1 from "./screens/products/ProductScreen1";
 import ProductScreen2 from "./screens/products/ProductScreen2";
 import ProductScreen3 from "./screens/products/ProductScreen3";
@@ -73,6 +74,7 @@ function App() {
         </Routes>
         <ToastContainer />
       </main>
+      <Footer />
     </Router>
   );
 }

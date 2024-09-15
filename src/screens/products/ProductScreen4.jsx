@@ -442,7 +442,7 @@ const ProductScreen4 = ({ onAddToCart }) => {
       id: 4,
       name: "VOLET MINI INDUS ALU 55",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       motor: selectedMotor,
       interrupteur: selectedInter,

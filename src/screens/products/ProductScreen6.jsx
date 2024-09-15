@@ -264,7 +264,7 @@ const ProductScreen6 = ({ onAddToCart }) => {
       id: 6,
       name: "TABLIER ALU 42",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       image: "/images/prod-5.png",
       price: price,

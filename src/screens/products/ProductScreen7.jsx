@@ -299,7 +299,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
       id: 7,
       name: "TABLIER ALU 55",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       image: "/images/prod-4.png",
       price: price,

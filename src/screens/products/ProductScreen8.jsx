@@ -297,7 +297,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
       id: 8,
       name: "VOLET MINI INDUS ALU 77",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       image: "/images/prod-6.png",
       price: price,

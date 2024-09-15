@@ -308,7 +308,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
       id: 3,
       name: "VOLET MINI CAISSON PVC 37",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       motor: selectedMotor,
       interrupteur: selectedInter,

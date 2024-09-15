@@ -427,7 +427,7 @@ const ProductScreen1 = ({ onAddToCart }) => {
       id: 1,
       name: "VOLET MINI CAISSON ALU 42",
       category: "VOLET",
-      dimensions: `${selectedLength} X ${selectedWidth}`,
+      dimensions: `${selectedWidth} X ${selectedLength}`,
       color: selectedColor,
       motor: selectedMotor,
       interrupteur: selectedInter,
@@ -669,7 +669,7 @@ const ProductScreen1 = ({ onAddToCart }) => {
               <h2 className="tot-text">
                 {price !== null
                   ? `${price.toFixed(2)}€`
-                  : "Price not available"}
+                  : "Dimension out of Range"}
               </h2>
             </div>
 
