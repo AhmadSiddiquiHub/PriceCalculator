@@ -634,7 +634,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
             {/* <hr className="custom" /> */}
 
             <div className="cables">
-              <h1 className="sub-head">SORITE DE CABLE</h1>
+              <h1 className="sub-head">SORTIE DE CABLE</h1>
               <div className="cables-container">
                 {cableTypes.map((cableType, index) => (
                   <div className="cable-wrapper" key={index}>

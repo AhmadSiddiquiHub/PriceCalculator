@@ -3,7 +3,14 @@ import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
+const PayPalButton = ({
+  totalPrice = 0,
+  cartItems,
+  formData,
+  onSuccess,
+  onFailure,
+  disabled,
+}) => {
   const paypalRef = useRef(null);
   const initialized = useRef(false);
 
@@ -52,8 +59,13 @@ const PayPalButton = ({ totalPrice = 0, cartItems, formData, disabled }) => {
                 // Send emails
                 sendEmailToCustomer();
                 sendEmailToSeller();
+
+                // Set Payment Status of success
+                onSuccess();
               },
               onError: (err) => {
+                // Set Payment Status of failed
+                onFailure();
                 console.error("PayPal error:", err);
               },
             })

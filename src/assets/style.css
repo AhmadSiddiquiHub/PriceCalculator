@@ -295,7 +295,7 @@ hr.custom {
 
 /* Style the radio button when checked */
 .radio-img-radio:checked + .radio-img-square {
-  border-color: #333333; /* Change the border color when checked */
+  border-color: #333333;
 }
 
 .cables {
@@ -512,24 +512,23 @@ hr.custom {
   display: none;
 }
 
-/* For small devices (e.g., phones) */
 @media only screen and (max-width: 600px) {
   .prod-page {
-    padding: 10px; /* Adjust padding for smaller screens */
+    padding: 10px;
   }
   .col-md-6 {
-    width: 100%; /* Make columns full width on small screens */
+    width: 100%;
   }
   .sel-inp {
-    margin-bottom: 20px; /* Add spacing between input sections */
+    margin-bottom: 20px;
   }
   .radio-img-option {
-    margin-right: 10px; /* Adjust spacing between motor options */
+    margin-right: 10px;
   }
   .motor-container,
   .interrupteur-container {
-    flex-direction: column; /* Change direction to column for mobile devices */
-    align-items: center; /* Center items horizontally */
+    flex-direction: column;
+    align-items: center;
   }
   .radio-img-option {
     margin-bottom: 10px;
@@ -542,21 +541,19 @@ hr.custom {
   }
 }
 
-/* For medium devices (e.g., tablets) */
 @media only screen and (min-width: 601px) and (max-width: 992px) {
   .sel-inp {
-    margin-bottom: 30px; /* Increase spacing between input sections */
+    margin-bottom: 30px;
   }
   .radio-img-option {
-    margin-right: 15px; /* Adjust spacing between motor options */
+    margin-right: 15px;
   }
 }
 
-/* For large devices (e.g., desktops) */
 @media only screen and (min-width: 993px) {
   .container {
-    max-width: 1200px; /* Limit container width for better readability */
-    margin: 0 auto; /* Center the container */
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
@@ -729,7 +726,7 @@ button[type="submit"]:hover {
 .pay-button {
   width: 100%;
   padding: 15px;
-  background-color: #0070ba;
+  background-color: #efcf1d;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -740,7 +737,7 @@ button[type="submit"]:hover {
 }
 
 .pay-button:hover {
-  background-color: #005f99;
+  background-color: #fed702;
 }
 
 /* Cart Section */
@@ -1298,10 +1295,6 @@ input[type="radio"]:checked + label .option-label {
   .color-label {
     font-size: 7.6px;
   }
-  .inter-img-text {
-    border: 3px solid #ccc !important;
-    border-radius: 12px;
-  }
 }
 
 /* Empty Cart */
@@ -1382,4 +1375,49 @@ input[type="radio"]:checked + label .option-label {
 .foot-logo img {
   width: 200px;
   height: auto;
+}
+
+/* Payment Status Page */
+.payment-status {
+  margin: 150px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-success-content,
+.payment-fail-content {
+  text-align: center;
+
+  h2 {
+    font-weight: bold;
+    color: #fed702;
+  }
+
+  .back-home {
+    border: 2px solid #efcf1d;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #efcf1d;
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      color: #333333;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    &:hover {
+      background-color: #fed702;
+    }
+  }
+}
+
+.payment-success-content video,
+.payment-fail-content video {
+  pointer-events: none;
 }
