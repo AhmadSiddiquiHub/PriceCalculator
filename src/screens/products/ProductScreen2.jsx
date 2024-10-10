@@ -391,7 +391,11 @@ const ProductScreen2 = ({ onAddToCart }) => {
         basePrice += interPrice;
       }
 
-      setPrice(basePrice);
+      // setPrice(basePrice);
+      // Apply 21% tax
+      const finalPriceWithTax = basePrice * 1.21;
+
+      setPrice(finalPriceWithTax);
     } else {
       setPrice(null);
     }
@@ -460,7 +464,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
                   <label className="labels">
                     <span className="labels-head">Largeur</span>
                     <br />
-                    Min (800m) & Max (4000m)
+                    Min (800mm) & Max (4000mm)
                   </label>
                   <input
                     type="number"
@@ -481,7 +485,7 @@ const ProductScreen2 = ({ onAddToCart }) => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    Min (800m) & Max (4000m)
+                    Min (800mm) & Max (4000mm)
                   </label>
                   <input
                     type="number"
