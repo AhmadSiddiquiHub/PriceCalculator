@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 // Length and Width arrays
 const lengths = [
-  197, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000,
+  800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000,
   2100, 2200, 2300, 2400, 2500, 2600, 2700,
 ];
 const widths = [
@@ -375,7 +375,7 @@ const ProductScreen3 = ({ onAddToCart }) => {
                   <label className="labels">
                     <span className="labels-head">Hauteur</span>
                     <br />
-                    Min (197mm) & Max (2700mm)
+                    Min (800mm) & Max (2700mm)
                   </label>
                   <input
                     type="number"

@@ -182,6 +182,7 @@ const CheckoutPage = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
+                          required
                         />
                         <i>
                           <AiOutlineInfoCircle className="info-icon-phone" />
