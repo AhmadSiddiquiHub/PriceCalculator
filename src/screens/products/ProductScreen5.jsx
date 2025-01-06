@@ -446,13 +446,14 @@ const ProductScreen5 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
               <span className="sub-heading">Personnalisez votre</span> <br />
-              <div class="spaced-text">
+              <div class="spaced-text">VOLET MINI INDUS ALU 77</div>
+              {/* <div class="spaced-text">
                 <span>V O L E T</span>
                 <span>M I N I</span>
                 <span>I N D U S</span>
                 <span>A L U</span>
                 <span>7 7</span>
-              </div>
+              </div> */}
             </h1>
 
             <div className="dimensions">

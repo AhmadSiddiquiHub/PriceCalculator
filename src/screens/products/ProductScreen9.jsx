@@ -188,11 +188,12 @@ const ProductScreen3 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
               <span className="sub-heading">Personnalisez votre</span> <br />
-              <div class="spaced-text">
+              <div class="spaced-text">TABLIER PVC 37</div>
+              {/* <div class="spaced-text">
                 <span>T A B L I E R</span>
                 <span>P V C</span>
                 <span>3 7</span>
-              </div>
+              </div> */}
             </h1>
 
             <div className="dimensions">

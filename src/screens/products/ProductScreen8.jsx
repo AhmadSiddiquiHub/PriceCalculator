@@ -324,11 +324,12 @@ const ProductScreen3 = ({ onAddToCart }) => {
           <div className="col-md-6 col-12 right">
             <h1 className="main-head">
               <span className="sub-heading">Personnalisez votre</span> <br />
-              <div class="spaced-text">
+              <div class="spaced-text">TABLIER ALU 77</div>
+              {/* <div class="spaced-text">
                 <span>T A B L I E R</span>
                 <span>A L U</span>
                 <span>7 7</span>
-              </div>
+              </div> */}
             </h1>
 
             <div className="dimensions">
