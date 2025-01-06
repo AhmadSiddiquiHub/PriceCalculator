@@ -95,6 +95,15 @@ const CheckoutPage = () => {
     setPaymentStatus(false);
   };
 
+  const toggleStoreLocations = (show) => {
+    const storeLocations = document.getElementById("store-locations");
+    if (show) {
+      storeLocations.style.display = "block";
+    } else {
+      storeLocations.style.display = "none";
+    }
+  };
+
   return (
     <div className="checkout-page">
       {paymentStatus ? (
@@ -107,7 +116,7 @@ const CheckoutPage = () => {
                 <div className="checkout-section"></div>
                 <form>
                   <div className="checkout-section">
-                    <h3 className="section-head">Delivery</h3>
+                    <h3 className="section-head">Billing Address</h3>
                     <CountrySelect
                       value={formData.country}
                       onChange={handleCountryChange}
@@ -192,6 +201,99 @@ const CheckoutPage = () => {
                   </div>
                 </form>
               </div>
+
+              {/* Checkout Same as Shipping */}
+              {/* <div className="delivery-section">
+                <h2>Delivery</h2>
+                <div className="delivery-options">
+                  <label className="delivery-option">
+                    <input type="radio" name="delivery" value="ship" />
+                    <div className="option-content">
+                      <i className="icon-ship"></i> Ship
+                    </div>
+                  </label>
+                  <label className="delivery-option">
+                    <input
+                      type="radio"
+                      name="delivery"
+                      value="pickup"
+                      // checked
+                    />
+                    <div className="option-content selected">
+                      <i className="icon-pickup"></i> Pickup in store
+                    </div>
+                  </label>
+                </div>
+                <div className="store-locations">
+                  <h3>Store locations</h3>
+                  <p>There is 1 store with stock close to your location</p>
+                  <div className="store-card">
+                    <div className="store-info">
+                      <strong>VoletMarket - Bruxelles</strong>
+                      <span>(5,992.9 km)</span>
+                      <p>Rue du Potaerdenberg 342, Molenbeek-Saint-Jean</p>
+                    </div>
+                    <div className="store-meta">
+                      <div className="store-status">
+                        <span className="store-cost">FREE</span>
+                        <span>Usually ready in 24 hours</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> */}
+              <div className="delivery-section">
+                <h2>Delivery</h2>
+                <div className="delivery-options">
+                  <label className="delivery-option">
+                    <input
+                      type="radio"
+                      name="delivery"
+                      value="ship"
+                      checked
+                      onClick={() => toggleStoreLocations(false)}
+                    />
+                    <div className="option-content">
+                      <i className="icon-ship"></i> Ship
+                    </div>
+                  </label>
+                  <label className="delivery-option">
+                    <input
+                      type="radio"
+                      name="delivery"
+                      value="pickup"
+                      onClick={() => toggleStoreLocations(true)}
+                    />
+                    <div className="option-content">
+                      <i className="icon-pickup"></i> Pickup in store
+                    </div>
+                  </label>
+                </div>
+                <div
+                  className="store-locations"
+                  id="store-locations"
+                  style={{ display: "none" }}
+                >
+                  <h3>Store locations</h3>
+                  <p>There is 1 store with stock close to your location</p>
+                  <div className="store-card">
+                    <div className="store-info">
+                      <strong>VoletMarket - Bruxelles</strong>
+                      <span>(5,992.9 km)</span>
+                      <p>Rue du Potaerdenberg 342, Molenbeek-Saint-Jean</p>
+                    </div>
+                    <div className="store-meta">
+                      <div className="store-status">
+                        <span className="store-cost">FREE</span>
+                        <span>Usually ready in 24 hours</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Payment Section */}
+
               <div className="payment-gateways">
                 <h3 className="section-head">Payment</h3>
                 <div className="payment-description">
