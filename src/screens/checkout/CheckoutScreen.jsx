@@ -25,6 +25,7 @@ const CheckoutPage = () => {
     city: "",
     phone: "",
     country: null,
+    shipping: "ship",
   });
 
   const handleOptionChange = (option) => {
@@ -60,6 +61,7 @@ const CheckoutPage = () => {
       "postalCode",
       "city",
       "phone",
+      "shipping",
     ];
     for (const field of requiredFields) {
       if (!formData[field] || formData[field].trim() === "") {
@@ -102,6 +104,14 @@ const CheckoutPage = () => {
     } else {
       storeLocations.style.display = "none";
     }
+  };
+
+  const handleRadioChange = (event) => {
+    const { value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      shipping: value,
+    }));
   };
 
   return (
@@ -199,97 +209,68 @@ const CheckoutPage = () => {
                       </div>
                     </div>
                   </div>
-                </form>
-              </div>
 
-              {/* Checkout Same as Shipping */}
-              {/* <div className="delivery-section">
-                <h2>Delivery</h2>
-                <div className="delivery-options">
-                  <label className="delivery-option">
-                    <input type="radio" name="delivery" value="ship" />
-                    <div className="option-content">
-                      <i className="icon-ship"></i> Ship
+                  <div className="delivery-section">
+                    <h2>Delivery</h2>
+                    <div className="delivery-options">
+                      <label className="delivery-option delivery-radio-1">
+                        <input
+                          type="radio"
+                          name="delivery"
+                          value="ship"
+                          checked={formData.shipping === "ship"}
+                          onChange={handleRadioChange}
+                          onClick={() => toggleStoreLocations(false)}
+                        />
+                        <div
+                          className={`option-content ${
+                            formData.shipping === "ship" ? "selected" : ""
+                          }`}
+                        >
+                          <i className="icon-ship"></i> Ship
+                        </div>
+                      </label>
+                      <label className="delivery-option delivery-radio-2">
+                        <input
+                          type="radio"
+                          name="delivery"
+                          value="pickup"
+                          checked={formData.shipping === "pickup"}
+                          onChange={handleRadioChange}
+                          onClick={() => toggleStoreLocations(true)}
+                        />
+                        <div
+                          className={`option-content ${
+                            formData.shipping === "pickup" ? "selected" : ""
+                          }`}
+                        >
+                          <i className="icon-pickup"></i> Pickup in store
+                        </div>
+                      </label>
                     </div>
-                  </label>
-                  <label className="delivery-option">
-                    <input
-                      type="radio"
-                      name="delivery"
-                      value="pickup"
-                      // checked
-                    />
-                    <div className="option-content selected">
-                      <i className="icon-pickup"></i> Pickup in store
-                    </div>
-                  </label>
-                </div>
-                <div className="store-locations">
-                  <h3>Store locations</h3>
-                  <p>There is 1 store with stock close to your location</p>
-                  <div className="store-card">
-                    <div className="store-info">
-                      <strong>VoletMarket - Bruxelles</strong>
-                      <span>(5,992.9 km)</span>
-                      <p>Rue du Potaerdenberg 342, Molenbeek-Saint-Jean</p>
-                    </div>
-                    <div className="store-meta">
-                      <div className="store-status">
-                        <span className="store-cost">FREE</span>
-                        <span>Usually ready in 24 hours</span>
+                    <div
+                      className="store-locations"
+                      id="store-locations"
+                      style={{ display: "none" }}
+                    >
+                      <h3>Store locations</h3>
+                      <p>There is 1 store with stock close to your location</p>
+                      <div className="store-card">
+                        <div className="store-info">
+                          <strong>VoletMarket - Bruxelles</strong>
+                          <span>(5,992.9 km)</span>
+                          <p>Rue du Potaerdenberg 342, Molenbeek-Saint-Jean</p>
+                        </div>
+                        <div className="store-meta">
+                          <div className="store-status">
+                            <span className="store-cost">FREE</span>
+                            <span>Usually ready in 24 hours</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div> */}
-              <div className="delivery-section">
-                <h2>Delivery</h2>
-                <div className="delivery-options">
-                  <label className="delivery-option">
-                    <input
-                      type="radio"
-                      name="delivery"
-                      value="ship"
-                      checked
-                      onClick={() => toggleStoreLocations(false)}
-                    />
-                    <div className="option-content">
-                      <i className="icon-ship"></i> Ship
-                    </div>
-                  </label>
-                  <label className="delivery-option">
-                    <input
-                      type="radio"
-                      name="delivery"
-                      value="pickup"
-                      onClick={() => toggleStoreLocations(true)}
-                    />
-                    <div className="option-content">
-                      <i className="icon-pickup"></i> Pickup in store
-                    </div>
-                  </label>
-                </div>
-                <div
-                  className="store-locations"
-                  id="store-locations"
-                  style={{ display: "none" }}
-                >
-                  <h3>Store locations</h3>
-                  <p>There is 1 store with stock close to your location</p>
-                  <div className="store-card">
-                    <div className="store-info">
-                      <strong>VoletMarket - Bruxelles</strong>
-                      <span>(5,992.9 km)</span>
-                      <p>Rue du Potaerdenberg 342, Molenbeek-Saint-Jean</p>
-                    </div>
-                    <div className="store-meta">
-                      <div className="store-status">
-                        <span className="store-cost">FREE</span>
-                        <span>Usually ready in 24 hours</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </form>
               </div>
 
               {/* Payment Section */}
@@ -507,19 +488,36 @@ const CheckoutPage = () => {
                       <span>Subtotal</span>
                       <span>€{totalPrice.toFixed(2)}</span>
                     </div>
-                    <div className="shipping">
-                      <span>
-                        Shipping
-                        <span
-                          className="info-icon"
-                          onClick={toggleShippingPolicy}
-                        >
-                          <RiQuestionLine />
+                    {formData.shipping === "ship" ? (
+                      <div className="shipping">
+                        <span>
+                          Shipping
+                          <span
+                            className="info-icon"
+                            onClick={toggleShippingPolicy}
+                          >
+                            <RiQuestionLine />
+                          </span>
                         </span>
-                      </span>
 
-                      <span>FREE</span>
-                    </div>
+                        <span>Enter shipping address</span>
+                      </div>
+                    ) : (
+                      <div className="shipping">
+                        <span>
+                          Pickup in store
+                          <span
+                            className="info-icon"
+                            onClick={toggleShippingPolicy}
+                          >
+                            <RiQuestionLine />
+                          </span>
+                        </span>
+
+                        <span>FREE</span>
+                      </div>
+                    )}
+
                     <div className="cart-total">
                       <span>Total</span>
                       <span>

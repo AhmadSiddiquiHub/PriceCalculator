@@ -111,6 +111,7 @@ const PayPalButton = ({
         city: formData.city || "",
         postalCode: formData.postalCode || "",
         country: formData.country.label || "",
+        delivery: formData.shipping || "",
         cartItems: products,
         totalPrice: totalPrice.toFixed(2),
       };
@@ -146,6 +147,7 @@ const PayPalButton = ({
         city: formData.city || "",
         postalCode: formData.postalCode || "",
         country: formData.country.label || "",
+        delivery: formData.shipping || "",
         cartItems: products,
         totalPrice: totalPrice.toFixed(2),
       };

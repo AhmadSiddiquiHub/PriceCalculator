@@ -1428,7 +1428,6 @@ input[type="radio"]:checked + label .option-label {
 /* Checkout Same as Shipping Address */
 
 .delivery-section {
-  /* border: 1px solid #eaeaea; */
   padding-top: 16px;
   border-radius: 8px;
   background-color: #fff;
@@ -1442,7 +1441,8 @@ input[type="radio"]:checked + label .option-label {
 
 .delivery-options {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: -10px;
   margin-bottom: 24px;
 }
 
@@ -1450,19 +1450,28 @@ input[type="radio"]:checked + label .option-label {
   display: flex;
   align-items: center;
   cursor: pointer;
-}
-
-.delivery-option input {
-  display: none;
-}
-
-.delivery-option .option-content {
-  display: flex;
-  align-items: center;
   border: 1px solid #eaeaea;
-  border-radius: 8px;
   padding: 12px 16px;
   transition: background-color 0.3s, border-color 0.3s;
+  margin: 0px;
+}
+
+.delivery-radio-1 {
+  border-radius: 8px 8px 0px 0px;
+}
+
+.delivery-radio-2 {
+  border-radius: 0px 0px 8px 8px;
+}
+
+/* .delivery-option input {
+  display: none;
+} */
+
+.delivery-option .option-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .delivery-option .option-content i {
@@ -1470,7 +1479,7 @@ input[type="radio"]:checked + label .option-label {
   margin-right: 8px;
 }
 
-.delivery-option .option-content.selected {
+.delivery-option:has(.option-content.selected) {
   background-color: #fff7e6;
   border-color: #ffd700;
 }
